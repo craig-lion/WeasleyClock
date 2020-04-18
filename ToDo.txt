@@ -45,6 +45,11 @@ Weasley Clock App
     - Could be adware but not ideal as that would take away from overall user experience
     - Can recieve revenue for sending users to Uber/Lyft/Yelp/OpenTable?
     - Keep overhead low by focusing on app being as lightweight as possible, leverage functionality of larger orgs (e.g. FB Auth)
+  * Technologies
+    - React-Native for mobile app
+    - Express for Server
+    - Mongo, love of my life, for DB
+    
 
 
   Notes
