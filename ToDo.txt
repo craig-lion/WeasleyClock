@@ -1,0 +1,56 @@
+Weasley Clock App
+
+  * Written Description
+  The goal for this project is to recreate the 'Weasley Clock' from the Harry Potter series.  This magical grandfather clock tells people's
+  location/status instead of time and is used by the Weasley Family to keep track of the peopel they care about.  Options on the clock include
+  things like 'work', 'school', 'travel', or even 'mortal peril'.  The goal of this app is to provide a similar service - the user can update
+  their location and add a status note.  For example say a user who is at home on a Thursday evening may have a different status if they are
+  up for dinner/drinks vs preparing for an important presentation Friday morning.  The goal for the app is to be fun, easy to use,
+  aesthetically appealing - you want users to enjoy interacting with the app so they will want to update their location/status.
+
+  * User Stories
+    Basic
+    - I want to be able to tell my friends what I am doing and let them know if I want to hang out
+    - I want to be able to see what my friends are up to and if they want to hang out
+    Intermediate
+    - I want text based communication with my friends based on their location/status
+    - I want suggestions for things I can do with my friend
+    Stretch
+    - I want directions/transportation options to our destination
+    - I want my location to automatically update
+    - I want to be able to voice/video chat with my friend(s) while we are on our way.
+
+  * Basic Requirements
+    - Render 'Clock'
+      - Default locations like home/work/gym/etc.
+      - Can add custom locations
+      - Can add text string status to location
+    - Can create user profile
+      - User profile has picture and basic info
+    - Can add friends
+      - Friends show up as new hands on the clock
+    - Can create friend groups
+      - Can filter which hands show by friend group
+  * Intermediate Requirements
+    - Can comment on status update
+    - Kick-out to Yelp/GoogleMaps
+      - Create a trip "portkey"
+  * Stretch Goals
+    - Can display my and friends locations on a Map
+      - Map provides turn by turn driving/walking/biking directions
+      - Links to Lyft/Uber/Scoot
+      - Links to OpenTable
+      - Links to AllTrails or other Outdoors
+  * Financial Notes
+    - Could be adware but not ideal as that would take away from overall user experience
+    - Can recieve revenue for sending users to Uber/Lyft/Yelp/OpenTable?
+    - Keep overhead low by focusing on app being as lightweight as possible, leverage functionality of larger orgs (e.g. FB Auth)
+
+
+  Notes
+  - Location + Status '@ home, come on over' '@ home enjoying me time'
+  - What about security? Should you be able to search all users? Maybe no search and person has to give you their username? Maybe Facebook
+    Auth so you can see your FB friends? Basically outsource security to them?
+  
+  - Do custom locations show up on friends clocks
+    - Only standard locations
