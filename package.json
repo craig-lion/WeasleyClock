@@ -1,0 +1,19 @@
+{
+  "name": "mvp",
+  "version": "1.0.0",
+  "description": "Weasley Clock App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craig-lion/WeasleyClock.git"
+  },
+  "author": "Craig M Lindahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/craig-lion/WeasleyClock/issues"
+  },
+  "homepage": "https://github.com/craig-lion/WeasleyClock#readme"
+}
