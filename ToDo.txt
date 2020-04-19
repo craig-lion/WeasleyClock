@@ -1,7 +1,24 @@
 Weasley Clock App
-
   * Basic Requirements
     - Render 'Clock'
+      x Learn what React Native is
+        x Learn how to render things in React Native
+          x Initialize Environment
+      x List out all Components
+      x Draw out all Components
+      x Attemp to render pre-made clock
+    x consider making it web based instead of mobile
+    - research options for rendering web based clock
+      - play around with react-clock
+        x create server
+        x create static html
+        x install airbnb eslint
+        - set up webpack
+          - configure webpack + babel
+            - create App.js
+        - render react-clock
+        - attempt to change how arm looks
+        - attempt to change what numbers appear on clock
       - Default locations like home/work/gym/etc.
       - Can add custom locations
       - Can add text string status to location

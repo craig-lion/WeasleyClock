@@ -1,0 +1,13 @@
+4/18
+* Wanted to be deliberate about app design so wanted to fully visualize the app before jumping into coding.
+  Started by making an app plan - description, customer stories, basic requirements, revenue streams.
+* Since app was location based, mobile made sense to decided to use React-Native
+* Next step was to work on front-end render
+  * Next step was to determine which pages/components need to be created and draw visuals
+* MAJOR QUESTION - should this be web or mobile - mobile has advantages, can use phone gps to update location - makes it easier
+use in multiple places vs web is mainly available on laptop.  mobile disadvantages is that this is supposed to look cool and be
+fun to play with so it is way easier to do that on web than mobile.  Challenge was that if it is mostly used on web how to have
+people have status updates other than 'at home'.  Want to encourage people to post what they are going to do 'I'm about to leave work'
+'at home - heading to the gym soon'.  Can still have eventual mobile app to facilitate mobile updates but similar model to facebook.
+Web app is most important and mobile is a nice addition.  Yes that could differ with different grups of people and in many countries
+monbile is main experience but that is outside the scope of this project.

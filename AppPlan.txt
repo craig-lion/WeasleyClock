@@ -59,3 +59,7 @@ Weasley Clock App
   
   - Do custom locations show up on friends clocks
     - Only standard locations
+  
+  - Users enter 'spell' instead of password
+  
+  - Initial loading screen that prompts user to confirm if status is still the same before loading clock
