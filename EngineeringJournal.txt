@@ -11,3 +11,5 @@ people have status updates other than 'at home'.  Want to encourage people to po
 'at home - heading to the gym soon'.  Can still have eventual mobile app to facilitate mobile updates but similar model to facebook.
 Web app is most important and mobile is a nice addition.  Yes that could differ with different grups of people and in many countries
 monbile is main experience but that is outside the scope of this project.
+4/19
+* Almost refactored app because I couldnt' figure out how to render clock but got some help and a plan.

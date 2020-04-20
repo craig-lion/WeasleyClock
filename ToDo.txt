@@ -8,20 +8,28 @@ Weasley Clock App
       x Draw out all Components
       x Attemp to render pre-made clock
     x consider making it web based instead of mobile
-    - research options for rendering web based clock
-      - play around with react-clock
+    x research options for rendering web based clock
+      x play around with react-clock
         x create server
         x create static html
         x install airbnb eslint
-        - set up webpack
-          - configure webpack + babel
-            - create App.js
-        - render react-clock
-        - attempt to change how arm looks
-        - attempt to change what numbers appear on clock
-      - Default locations like home/work/gym/etc.
-      - Can add custom locations
-      - Can add text string status to location
+        x set up webpack
+          x configure webpack + babel
+            x create App.js
+        x render react-clock
+      x play around with pie-chart
+        x learn about CanvasJS
+    x Render Rainbow
+      x Render a thing in React Native
+      x Work thru React-native tutorial
+      x Sketch out Components
+      x Render App with Header and Body sections
+    x Try to render circle
+    x Create function to locate points on circle
+    x Render point on circle
+    - Default locations like home/work/gym/etc.
+    - Can add custom locations
+    - Can add text string status to location
     - Can create user profile
       - User profile has picture and basic info
     - Can add friends
