@@ -27,8 +27,15 @@ Weasley Clock App
     x Try to render circle
     x Create function to locate points on circle
     x Render point on circle
-    - Default locations like home/work/gym/etc.
-    - Can add custom locations
+    x Default locations like home/work/gym/etc.
+      - Can add custom locations
+    - Can update location
+      - Create Input Field to update location
+        x research hooks
+        x attempt to place all vars in functional component
+          x attempt to create state hook
+          x create drop down
+          - updates location
     - Can add text string status to location
     - Can create user profile
       - User profile has picture and basic info
