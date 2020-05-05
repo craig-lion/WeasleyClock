@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import MakeCircles from './MakeCircles2'
+import MakeCircles from './MakeCircles'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -22,7 +19,7 @@ const Col = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Luminari;
+  font-family: 'Luminari';
   color: AntiqueWhite;
 `
 const Centered = styled.div`

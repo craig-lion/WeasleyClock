@@ -29,16 +29,30 @@ Weasley Clock App
     x Render point on circle
     x Default locations like home/work/gym/etc.
       - Can add custom locations
-    - Can update location
-      - Create Input Field to update location
+        x Add field to recieve text Input
+          x briefly research Redux
+          x create new component for topNav
+        - onSubmit updates locations with setLocation
+          x create handleSubmit fn
+          x properly render submit button and form
+          - handleSubmit updates locations
+            x pass setLocations to TopNav
+
+    x Can update location
+      x Create Input Field to update location
         x research hooks
         x attempt to place all vars in functional component
           x attempt to create state hook
           x create drop down
-          - updates location
+          x updates location
     - Can add text string status to location
+
     - Can create user profile
+      x user profile has userName
+        x default userName is Harry
+        x title at top of page displays current wizard name
       - User profile has picture and basic info
+    
     - Can add friends
       - Friends show up as new hands on the clock
     - Can create friend groups

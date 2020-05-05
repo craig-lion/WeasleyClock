@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 
 
 const DropDown = (props) => {
-  console.log('props', props)
+  console.log('props', props.locations)
   const locations = props.locations.map((location) => 
     <option font='luminari 24px' key={location} value={location}>{location}</option>
   )
@@ -13,12 +14,27 @@ const DropDown = (props) => {
   }
   return (
     <>
-      <label>Where are you?</label>
-      <select id="locations" onChange={moveArm}>
+      <Label>Where are you?</Label>
+      <Select id="locations" onChange={moveArm}>
         {locations}
-      </select>
+      </Select>
     </>
   )
 }
 
+const Label = styled.label`
+  color:antiquewhite;
+`
+
+const Select = styled.select`
+  color:antiquewhite;
+  background-image: url('darkWood.jpg');
+  opacity: 50%;
+  border-radius:18px;
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
+  font-family: 'Luminari';
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+`
 export default DropDown;

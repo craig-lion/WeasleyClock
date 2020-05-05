@@ -1,36 +1,26 @@
-import React from 'react';
-const helper = require('./helper.js')
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import TopNav from './TopNav'
+const helper = require('./helper.js');
 
-class SVGComponent extends React.Component {
-    render() {
-
-        return <svg {...this.props}>{this.props.children}</svg>;
-    }
-};
-
-class Circle extends React.Component{
-    render() {
-        return <circle {...this.props}>{this.props.children}</circle>;
-    }
-};
-
-const locations = ['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']
+const MakeCircles = () => {
+const [locations, setLocations] = useState(['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']);
 const radianUnit = 2*Math.PI / locations.length;
+const [userName, setUserName] = useState('Harry');
 
 const createDimensions = (sideLength, padding) => {
   const obj = {
     componentSide: (sideLength + padding * 2),
   }
-  // console.log('obj.componentSide: ', obj.componentSide)
   return obj
 }
 
-const dimensions = createDimensions(250, 100)
+const dimensions = createDimensions(150, 300)
 
 const circle = {
   centerX: dimensions.componentSide/2,
   centerY: dimensions.componentSide/2,
-  radius: 125
+  radius: 350
 };
 
 const makeLocations = (locations) => {
@@ -39,7 +29,7 @@ const makeLocations = (locations) => {
     let radian = radianUnit * i;
     let point = helper.getPointsOnCircle([circle.centerX, circle.centerY], circle.radius, radian);
     const location = (
-        <text key={locations[i]} textAnchor='middle' x={point[0]} y={point[1]}>{locations[i]}</text>
+        <Text fill='antiquewhite' className='text' key={locations[i]} textAnchor='middle' x={point[0]} y={point[1]}>{locations[i]}</Text>
     )
     array.push(location);
   }
@@ -62,26 +52,55 @@ const placeArm = (location) => {
   return obj;
 }
 
-const armLocation = placeArm('Adulting')
+
+const [currentLocation, setCurrentLocation] = useState(locations[0]);
+
+const Arm = () => {
+  const armLocation = placeArm(currentLocation);
+  return(
+  <line x1={circle.centerX} y1={circle.centerY} x2={armLocation.x} y2={armLocation.y} stroke='antiqueWhite' strokeWidth='5' position='relative' />
+)}
 
 const allLocations = makeLocations(locations)
-console.log(allLocations)
 
-class MakeCircles extends React.Component {
-  
-  render() {
     return (
-      <div>
-        <SVGComponent height={dimensions.componentSide} width={dimensions.componentSide}>
-          <Circle cx={circle.centerX} cy={circle.centerY} r={circle.radius} fill="none" stroke="#F0CE01" strokeWidth="2" />
-          <text textAnchor="middle" x={circle.centerX} y={circle.centerY}>Appare Vestigium</text>
-          {/* <circle cx="195" cy="236" r="2" fill="red"/> */}
-          {allLocations}
-          <line x1={circle.centerX} y1={circle.centerY} x2={armLocation.x} y2={armLocation.y} stroke="black" />
-        </SVGComponent>
-      </div>
+        <>
+          <TopNav userName={userName} setCurrentLocation={setCurrentLocation} setLocations={setLocations} locations={locations}/>
+          <Bottom>
+            <SVG overflow='auto' height={dimensions.componentSide} width={dimensions.componentSide}>
+              <Arm />
+              <Circle cx={circle.centerX} cy={circle.centerY} r={circle.radius} fill="rgba(204, 204, 204, 0.25)" stroke="tan" strokeWidth="2" />
+              <Text fill='antiquewhite' textAnchor="middle" x={circle.centerX} y={circle.centerY}>Appare Vestigium</Text>
+              {allLocations}
+            </SVG>
+          </Bottom>
+        </>
     );
-  }
 };
 
+const Text = styled.text`
+  font-size:30px;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  z-index:100;
+  position:absolute;
+`
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: center;
+  height:-webkit-fill-available;
+  width:100vw;
+  background-image: url('Burrow.jpg');
+`
+
+const SVG = styled.svg`
+  background: rgba(204, 204, 204, 0.25);
+  border-radius: 50%;
+  overflow: visible;
+  white-space: nowrap;
+  position:relative;
+`
+const Circle = styled.circle`
+  background: rgba(204, 204, 204, 0.5);
+`
 export default MakeCircles
