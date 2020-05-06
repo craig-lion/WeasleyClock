@@ -4,31 +4,24 @@ import DropDown from './DropDown';
 
 const TopNav = (props) => {
 
-let [textInput, setTextInput] = useState('');
+  const [text, setText] = useState('');
 
-const handleChange = (e) => {
-  setTextInput(e.target.value)
-}
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  console.log('locations before', props.locations)
-  props.locations.push(textInput)
-  props.setLocations(props.locations)
-  console.log('locations after', props.locations)
-  console.log('its all happening', textInput)
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('its all happening', props.currentLocation)
+    props.setLocations(locations => [...locations, text]) 
+    setText('');
+  }
 
   return(
   <TopNavStyle>
   <Title>You're a Wizard {props.userName}</Title>
-  <DropDown setCurrentLocation={props.setCurrentLocation} locations={props.locations} />
+  <DropDown setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
   <form onSubmit={handleSubmit}>
     <Div>
       <Label>Add A New Location</Label>
     </Div>
-  <Text type="text" color='antiquewhite' id="location" value={textInput} onChange={handleChange} name="location"></Text>
+  <Text type="text" color='antiquewhite' id="location" value={text} onChange={e => setText(e.target.value)} name="location"></Text>
   <Div>
   <Button type="submit" value='Portus!'></Button>
   </Div>

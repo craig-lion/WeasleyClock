@@ -57,6 +57,22 @@ Weasley Clock App
       - Friends show up as new hands on the clock
     - Can create friend groups
       - Can filter which hands show by friend group
+    
+    - user information persists over logins
+      x choose DB
+      x install dependencies
+      x create DB schema
+      x create DB
+      - create server routes
+        x create POST request
+        x create GET request
+      x create path from server to db
+      x create paths from front-end to DB
+      x front-end recieves data from DB
+      x front-end initial render is based on GET request from DB
+      - front-end updates DB
+
+
   * Intermediate Requirements
     - Can comment on status update
     - Kick-out to Yelp/GoogleMaps

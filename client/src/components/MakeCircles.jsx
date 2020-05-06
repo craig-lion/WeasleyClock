@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import TopNav from './TopNav'
+import TopNav from './TopNav';
+import axios from 'axios';
 const helper = require('./helper.js');
 
 const MakeCircles = () => {
-const [locations, setLocations] = useState(['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']);
-const radianUnit = 2*Math.PI / locations.length;
-const [userName, setUserName] = useState('Harry');
+  const [locations, setLocations] = useState(['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']);
+  const radianUnit = 2*Math.PI / locations.length;
+  const [userName, setUserName] = useState('Harry');
+  const [currentLocation, setCurrentLocation] = useState(()=> location[0]);
 
-const createDimensions = (sideLength, padding) => {
+  const createDimensions = (sideLength, padding) => {
   const obj = {
     componentSide: (sideLength + padding * 2),
   }
   return obj
-}
+  }
 
 const dimensions = createDimensions(150, 300)
 
@@ -52,20 +54,45 @@ const placeArm = (location) => {
   return obj;
 }
 
-
-const [currentLocation, setCurrentLocation] = useState(locations[0]);
+useEffect(() => {
+  axios.get('/api/users')
+  .then((res) => {
+    let oneUser = res.data;
+    console.log('this is oneUser: ', oneUser.currentLocation)
+    setLocations(oneUser.locations);
+    setUserName(oneUser.userName);
+    setCurrentLocation(oneUser.currentLocation)
+  })
+  .catch((err) => {throw err;})
+},[]);
 
 const Arm = () => {
   const armLocation = placeArm(currentLocation);
   return(
-  <line x1={circle.centerX} y1={circle.centerY} x2={armLocation.x} y2={armLocation.y} stroke='antiqueWhite' strokeWidth='5' position='relative' />
+  <line
+    x1={circle.centerX}
+    y1={circle.centerY} 
+    x2={armLocation.x} 
+    y2={armLocation.y} 
+    style={{
+      stroke: 'cadetblue',
+      strokeWidth: 10
+    }}
+  />
 )}
 
 const allLocations = makeLocations(locations)
 
     return (
         <>
-          <TopNav userName={userName} setCurrentLocation={setCurrentLocation} setLocations={setLocations} locations={locations}/>
+          <TopNav 
+            userName={userName} 
+            setCurrentLocation={setCurrentLocation}
+            setLocations={setLocations} 
+            locations={locations} 
+            currentLocation={currentLocation} 
+            setCurrentLocation={setCurrentLocation}
+          />
           <Bottom>
             <SVG overflow='auto' height={dimensions.componentSide} width={dimensions.componentSide}>
               <Arm />
