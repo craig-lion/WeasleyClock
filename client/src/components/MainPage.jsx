@@ -4,7 +4,7 @@ import TopNav from './TopNav';
 import axios from 'axios';
 const helper = require('./helper.js');
 
-const MakeCircles = () => {
+const MainPage = () => {
   const [locations, setLocations] = useState(['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']);
   const radianUnit = 2*Math.PI / locations.length;
   const [userName, setUserName] = useState('Harry');
@@ -73,10 +73,11 @@ const Arm = () => {
     x1={circle.centerX}
     y1={circle.centerY} 
     x2={armLocation.x} 
-    y2={armLocation.y} 
+    y2={armLocation.y}
     style={{
       stroke: 'cadetblue',
-      strokeWidth: 10
+      strokeWidth: 10,
+      strokeLinecap: 'round',
     }}
   />
 )}
@@ -130,4 +131,5 @@ const SVG = styled.svg`
 const Circle = styled.circle`
   background: rgba(204, 204, 204, 0.5);
 `
-export default MakeCircles
+
+export default MainPage

@@ -53,6 +53,13 @@ Weasley Clock App
         x title at top of page displays current wizard name
       - User profile has picture and basic info
     
+    -Has login/add user page
+      x create new page
+      x create state in App to conditionally render Login
+      - form to enter login information
+      - link  for forgotten password
+      - link for new User
+    
     - Can add friends
       - Friends show up as new hands on the clock
     - Can create friend groups
@@ -71,6 +78,8 @@ Weasley Clock App
       x front-end recieves data from DB
       x front-end initial render is based on GET request from DB
       - front-end updates DB
+        - create post req for updating locations
+        - create post route to db
 
 
   * Intermediate Requirements

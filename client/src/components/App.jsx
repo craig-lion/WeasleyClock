@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import MakeCircles from './MakeCircles'
+import MainPage from './MainPage';
+import Login from './Login'
 
-class App extends React.Component {
+const App = () => {
 
-  render() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  if (isLoggedIn === false) {
+    return (
+      <Col>
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      </Col>
+    )
+  } else {
     return (
       <Centered>
         <Col>
-          <MakeCircles />
+          <MainPage />
         </Col>
       </Centered>
     )

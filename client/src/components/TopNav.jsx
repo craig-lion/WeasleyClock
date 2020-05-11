@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import DropDown from './DropDown';
+const Styled = require('./Styles');
+
+// tried to implement styles in a separate file but it isn't working because it says it isn't "returning a string"
 
 const TopNav = (props) => {
 
   const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
+    let post = {};
     e.preventDefault();
-    console.log('its all happening', props.currentLocation)
-    props.setLocations(locations => [...locations, text]) 
+    let updateDB = async () => {
+      props.setLocations(locations => [...locations, text]);
+    }
+    updateDB()
+    .then(
+      post = { locations, userName: props.userName},
+      axios.post('/api/users', props.locations)
+      )
     setText('');
   }
 
