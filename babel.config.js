@@ -1,5 +1,13 @@
 module.exports = {
-  "presets": ["@babel/preset-env",  "@babel/preset-react",  "es2015", "stage-0" ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry"
+      }
+    ]
+  ],
+
   "plugins": [
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-export-default-from",
