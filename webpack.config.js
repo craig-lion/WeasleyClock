@@ -4,7 +4,7 @@ const public_dir = path.join(__dirname, 'client', 'public')
 
 module.exports = {
   mode: "development",
-  entry: ["babel-polyfill", `${src_dir}/index.jsx`],
+  entry: ["@babel/polyfill", `${src_dir}/index.jsx`],
   output: {
     filename: 'bundle.js',
     path: public_dir,
@@ -12,7 +12,6 @@ module.exports = {
   module: {
     rules: [
       {
-        devtool: "source-map",
         test: /\.jsx?/,
         include: src_dir,
         exclude: /node_modules/,
