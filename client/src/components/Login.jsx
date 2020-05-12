@@ -7,25 +7,35 @@ const Login = (props) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-// handleSubmit needs to be updated to use async
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let query = {userName, password};
-    // userNAme and pass are sent to db along with callback.
-       // If query produces error, no login and send back message
-       // else setIsLoggedIn(true)
     axios.post('/api/login', query)
     .then((result) => {
-      console.log('this is result.data: ', result.data)
+      if(result.data === false) {alert('Login Failed')}
+      props.setIsLoggedIn(result.data);
+    })
+    setUserName('');
+    setPassword('');
+  }
+
+  const handleNewUser = (e) => {
+    e.preventDefault();
+    let query = {userName, password};
+    axios.post('/api/addUser', query)
+    .then((result) => {
+      // console.log('this is result: ', result)
       props.setIsLoggedIn(true);
     })
     setUserName('');
     setPassword('');
   }
+
   return (
     <LoginStyle>
     <Title> New Wiz WhoDis?</Title>
-    <form onSubmit={handleSubmit}>
+    <form>
     <Div>
       <Label>What is your Wizard Name?</Label>
     </Div>
@@ -35,7 +45,8 @@ const Login = (props) => {
     </Div>
   <Text type="text" color='antiquewhite' id="password" value={password} onChange={e => setPassword(e.target.value)} name="password"></Text>
   <Div>
-  <Button type="submit" value='Portus!'></Button>
+  <Button type="submit" value="Y'all Know Who I Am" onClick={handleSubmit}></Button>
+    <Button type="submit" value="New Wiz" onClick={handleNewUser}></Button>
   </Div>
   </form>
   </LoginStyle>

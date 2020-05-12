@@ -19,8 +19,9 @@ const TopNav = (props) => {
     updateDB()
     .then(
       post = { locations, userName: props.userName},
-      axios.post('/api/users', props.locations)
+      // axios.post('/api/updateLocations', post)
       )
+      console.log('this is post: ', post)
     setText('');
   }
 

@@ -14,8 +14,8 @@ db.once('open', () => {
 });
 
 const schema = new mongoose.Schema({
-  userId: {type: Number, unique: true},
   userName: {type: String, unique: true},
+  password: {type: String},
   locations: { type: Array},
   currentLocation: {type: String}
 });

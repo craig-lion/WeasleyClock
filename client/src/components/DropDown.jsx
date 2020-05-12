@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 
 const DropDown = (props) => {
-  // console.log('props', props.locations)
   const locations = props.locations.map((location) => {
     if (location === props.currentLocation) {
       return (
@@ -14,7 +13,6 @@ const DropDown = (props) => {
         <option key={location} value={location}>{location}</option>
         )
     }
-
 })
 
   const moveArm = (e) => {

@@ -58,7 +58,8 @@ useEffect(() => {
   axios.get('/api/users')
   .then((res) => {
     let oneUser = res.data;
-    console.log('this is oneUser: ', oneUser.currentLocation)
+    // console.log('this is res: ', res)
+    // console.log('this is oneUser: ', oneUser.currentLocation)
     setLocations(oneUser.locations);
     setUserName(oneUser.userName);
     setCurrentLocation(oneUser.currentLocation)

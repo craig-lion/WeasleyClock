@@ -56,9 +56,11 @@ Weasley Clock App
     -Has login/add user page
       x create new page
       x create state in App to conditionally render Login
-      - form to enter login information
+      x form to enter login information
+      x link for new User
+        x figure out what newUser did to break the Get request
+        x make add New User add correct info
       - link  for forgotten password
-      - link for new User
     
     - Can add friends
       - Friends show up as new hands on the clock
