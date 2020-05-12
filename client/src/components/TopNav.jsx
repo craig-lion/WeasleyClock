@@ -14,14 +14,19 @@ const TopNav = (props) => {
     let post = {};
     e.preventDefault();
     let updateDB = async () => {
-      props.setLocations(locations => [...locations, text]);
+      const newLocations = [...props.locations, text];
+      console.log('new Locations: ', newLocations)
+      props.setLocations(newLocations);
+      return newLocations
     }
     updateDB()
-    .then(
-      post = { locations, userName: props.userName},
-      // axios.post('/api/updateLocations', post)
-      )
-      console.log('this is post: ', post)
+    .then((locations) => {
+
+      post = { locations, "userName": props.userName},
+      console.log('this is post in the then: ', post)
+      axios.post('/api/updateLocations', post)
+    }
+    )
     setText('');
   }
 

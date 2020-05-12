@@ -18,13 +18,13 @@ const saveUser = (userName, password) => {
   })
 }
 
-const updateLocations = async (data) => {
-  let newUser = new db.User(data);
-  newUser.save((err) => {if(err) {console.log(err)}})
+const updateLocations = async (userName, locations) => {
+  await db.User.findOneAndUpdate({userName}, {locations})
+  console.log('it probably worked :shrug: ')
 }
 
 const userInfo = async (userName, callback) => {
-  var query  = db.User.where({ userName });
+  let query  = db.User.where({ userName });
   query.findOne((err, data) => {
     if (err) {throw err;}
     else {callback(data)}
@@ -32,7 +32,7 @@ const userInfo = async (userName, callback) => {
 }
 
   const login = (userName, password) => {
-    var query  = db.User.where({ userName });
+    let query  = db.User.where({ userName });
     return new Promise ((resolve, reject) => {
       query.findOne((err, data) => {
       if (err) {reject(err)}
