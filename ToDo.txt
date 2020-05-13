@@ -28,14 +28,14 @@ Weasley Clock App
     x Create function to locate points on circle
     x Render point on circle
     x Default locations like home/work/gym/etc.
-      - Can add custom locations
+      x Can add custom locations
         x Add field to recieve text Input
           x briefly research Redux
           x create new component for topNav
-        - onSubmit updates locations with setLocation
+        x onSubmit updates locations with setLocation
           x create handleSubmit fn
           x properly render submit button and form
-          - handleSubmit updates locations
+          x handleSubmit updates locations
             x pass setLocations to TopNav
 
     x Can update location
@@ -45,6 +45,10 @@ Weasley Clock App
           x attempt to create state hook
           x create drop down
           x updates location
+    - Can remove location
+      - create html button
+      - create onClick
+        - onClick updates locations
     - Can add text string status to location
 
     - Can create user profile

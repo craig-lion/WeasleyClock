@@ -20,7 +20,6 @@ const saveUser = (userName, password) => {
 
 const updateLocations = async (userName, locations) => {
   await db.User.findOneAndUpdate({userName}, {locations})
-  console.log('it probably worked :shrug: ')
 }
 
 const userInfo = async (userName, callback) => {
