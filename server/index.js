@@ -38,12 +38,14 @@ app.post('/api/login', (req, res) => {
 })
 
 app.post('/api/updateLocations', (req, res) => {
-  models.updateLocations(req.body.userName, req.body.locations)
+  if (req.body.locations) {
+  models.updateLocations(req.body.userName, req.body.currentLocation, req.body.locations)
   .then(
   console.log(`Locations Updated`),
-  )
-  console.log('this is req', req.body)
-  res.send('Kreatcher Hates Dobby')
+  )} else {
+    models.updateLocations(req.body.userName, req.body.currentLocation)
+    .then(console.log('currentLocation only Updated'))
+  }
 })
 
 // Also really intreested to have you help with the below

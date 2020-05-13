@@ -22,8 +22,7 @@ const TopNav = (props) => {
     }
     updateDB()
     .then((locations) => {
-
-      post = { locations, "userName": props.userName},
+      post = { locations, 'userName': props.userName, 'currentLocation': props.currentLocation },
       console.log('this is post in the then: ', post)
       axios.post('/api/updateLocations', post)
     }
@@ -52,8 +51,8 @@ const TopNav = (props) => {
     updateDB()
     .then((locations) => {
 
-      post = { locations, "userName": props.userName},
-      console.log('this is post in the then: ', post)
+      post = { locations, 'userName': props.userName, 'currentLocation': locations[0]},
+      console.log('this is post for Remove in the then: ', post)
       axios.post('/api/updateLocations', post)
     }
     )
@@ -62,7 +61,7 @@ const TopNav = (props) => {
   return(
   <TopNavStyle>
   <Title>You're a Wizard {props.userName}</Title>
-  <DropDown setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
+  <DropDown userName={props.userName} setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
   <form onSubmit={handleSubmit}>
     <Div>
       <Label>Add A New Location</Label>
