@@ -50,7 +50,7 @@ const allUserNames = async (callback) => {
       if (err) {reject(err)}
       else {
         if (data === null) {resolve(false)}
-        else {resolve(true)}
+        else {resolve(data.userName)}
       }
     })
     })

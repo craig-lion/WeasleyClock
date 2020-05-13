@@ -6,18 +6,19 @@ import Login from './Login'
 const App = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginUserName, setLoginUserName] = useState('');
 
   if (isLoggedIn === false) {
     return (
       <Col>
-        <Login setIsLoggedIn={setIsLoggedIn} />
+        <Login setLoginUserName={setLoginUserName} setIsLoggedIn={setIsLoggedIn} />
       </Col>
     )
   } else {
     return (
       <Centered>
         <Col>
-          <MainPage />
+          <MainPage currentUser={loginUserName} />
         </Col>
       </Centered>
     )

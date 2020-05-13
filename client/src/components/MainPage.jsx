@@ -4,10 +4,10 @@ import TopNav from './TopNav';
 import axios from 'axios';
 const helper = require('./helper.js');
 
-const MainPage = () => {
+const MainPage = (props) => {
   const [locations, setLocations] = useState(['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']);
   const radianUnit = 2*Math.PI / locations.length;
-  const [userName, setUserName] = useState('Harry');
+  const [userName, setUserName] = useState('');
   const [currentLocation, setCurrentLocation] = useState(()=> location[0]);
 
   const createDimensions = (sideLength, padding) => {
@@ -54,15 +54,15 @@ const placeArm = (location) => {
   return obj;
 }
 
-useEffect(() => {
-  axios.get('/api/users', {userName})
+useEffect( () => {
+    axios.get('/api/users')
   .then((res) => {
     let oneUser = res.data;
     setLocations(oneUser.locations);
     setUserName(oneUser.userName);
     setCurrentLocation(oneUser.currentLocation)
   })
-  .catch((err) => {throw err;})
+  .catch(err => {throw err;})
 },[]);
 
 const Arm = () => {

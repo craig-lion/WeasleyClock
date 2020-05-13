@@ -1,10 +1,13 @@
 const express = require('express');
 const path = require ('path');
-const models = require ('../database/models.js')
+const models = require ('../database/models.js');
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = 734;
 
 app.use(express.json())
+app.use(cookieParser())
+
 app.use('/',express.static(path.join(__dirname, '../client', 'public')))
 
 app.post('/api/addUser', (req, res) => {
@@ -20,14 +23,20 @@ app.post('/api/addUser', (req, res) => {
       }
     }
   )
+  .catch(err => console.log(err))
   res.send('Dobby is a Good House Elf Sir')
 })
-
+// pass back userName and use it in useEffect query
 app.post('/api/login', (req, res) => {
   models.login(req.body.userName, req.body.password)
-  .then((isUser) => {
-    // console.log('this is isUser: ', isUser)
-    if (isUser) {
+  .then((userName) => {
+    if (userName) {
+      const options = {
+        maxAge: 2.592e+9,
+        httpOnly: true,
+      }
+      res.cookie('session', `${userName}`, options)
+      console.log('this is userName: ', userName)
       res.send(true)
       console.log('successful login')
     } else {
@@ -35,6 +44,7 @@ app.post('/api/login', (req, res) => {
       console.log('failed login')
     }
   })
+  .catch(err => console.log(err))
 })
 
 app.post('/api/updateLocations', (req, res) => {
@@ -62,7 +72,9 @@ app.get('/api/users/', (req, res) => {
     oneUser = JSON.stringify(data)
     res.send(oneUser)
   }
-  models.userInfo( req.body.userName, callback);
+  console.log('we did it all for these cookies: ', req.cookies.session)
+  let userName = req.body.userName || req.cookies.session
+  models.userInfo( userName, callback);
 })
 
 app.get('/api/allUsers', (req, res) => {
