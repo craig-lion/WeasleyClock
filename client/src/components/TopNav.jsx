@@ -93,10 +93,10 @@ const TopNav = (props) => {
     )
   } else {
     return (
-      <TopNavStyle>
+      <TopNavFriendStyle>
       <Title>You're a Wizard {props.userName}</Title>
       <Friends handleLocations={handleLocations} />
-      </TopNavStyle>
+      </TopNavFriendStyle>
       )
   }
 }
@@ -110,6 +110,18 @@ const TopNavStyle = styled.div`
   flex-direction: column;
   align-items: center;
   height: 175px;
+  width: 100vw;
+  background-image: url('darkWood.jpg');
+  text-align: center;
+  padding:5px;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  `
+
+  const TopNavFriendStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 375px;
   width: 100vw;
   background-image: url('darkWood.jpg');
   text-align: center;

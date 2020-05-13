@@ -7,7 +7,8 @@ const saveUser = (userName, password) => {
     userName,
     password,
     locations: ['@ Work', 'On the Move', 'Let\'s Rage', 'Breathing Hard', 'Let\'s Chill', 'Self-Care', 'Adulting'],
-    currentLocation: 'Let\'s Rage'
+    currentLocation: 'Let\'s Rage',
+    friends: ['Lion']
   });
   console.log('this is newUser in models: ', newUser)
   return new Promise ((resolve, reject) => {
