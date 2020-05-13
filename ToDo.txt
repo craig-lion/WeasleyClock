@@ -80,10 +80,10 @@ Weasley Clock App
             x yourOrder renders dummy names array
             x update schema to have 'friends' property
             - allWiz renders list of all users
-              - create state for allUsers
+              x create state for allUsers
               - create useEffect to update allUsers when component loads
             - yourOrder renders list of users friends
-              - create state for myFriends
+              x create state for myFriends
               - useEffect to update myFriends when component loads
             - can click on name to add/remove friend
 

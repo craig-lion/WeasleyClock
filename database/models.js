@@ -35,6 +35,14 @@ const userInfo = async (userName, callback) => {
   })
 }
 
+const allUserNames = async (callback) => {
+  let query = db.User.find({}).select('userName -_id');
+    query.exec((err, data) => {
+        if (err) {throw err};
+        callback(data);
+    });
+}
+
   const login = (userName, password) => {
     let query  = db.User.where({ userName });
     return new Promise ((resolve, reject) => {
@@ -48,4 +56,4 @@ const userInfo = async (userName, callback) => {
     })
 }
 
-module.exports = {saveUser, userInfo, updateLocations, login}
+module.exports = {saveUser, userInfo, updateLocations, login, allUserNames}

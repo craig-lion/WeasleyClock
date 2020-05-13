@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Friends = (props) => {
 
-  const dummyStrings = ['Kimmy', 'Titus', 'Jane', 'Tina'];
+
+  const [allUsersList, setAllUsersList] = useState(['Kimmy', 'Titus', 'Jane', 'Tina']);
+  const [friendsList, setFriendsList] = useState(['Harry', 'Ron', 'Hermionie']);
+
 
   const AllUsers =  () => (
-      dummyStrings.map(
-        friend => (
-        <div className="friend" key={friend}>{friend}</div>
+      allUsersList.map(
+        user => (
+        <div className="user" key={user}>{user}</div>
         )
       )
   ); 
 
-  const MyOrder =  () => (
-    dummyStrings.map(
+  const Friends =  () => (
+    friendsList.map(
       friend => (
       <div className="friend" key={friend}>{friend}</div>
       )
     )
-); 
+  );
+  
+  useEffect(() => {
+    axios.get('/api/allUsers')
+    .then((res) => {
+      let allUsers = res.data;
+      console.log('this is res in Friends: ', allUsers)
+    })
+    .catch((err) => {throw err;})
+  }, []);
 
   return (
     <>
@@ -33,7 +46,7 @@ const Friends = (props) => {
         </Left>
         <Right>
           Wizards in Your Order Go Here
-          <MyOrder />
+          <Friends />
         </Right>
       </Container>
       <Div>

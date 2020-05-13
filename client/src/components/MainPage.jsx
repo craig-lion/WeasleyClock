@@ -55,7 +55,7 @@ const placeArm = (location) => {
 }
 
 useEffect(() => {
-  axios.get('/api/users')
+  axios.get('/api/users', {userName})
   .then((res) => {
     let oneUser = res.data;
     setLocations(oneUser.locations);

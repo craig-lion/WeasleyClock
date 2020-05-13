@@ -95,7 +95,7 @@ const TopNav = (props) => {
     return (
       <TopNavFriendStyle>
       <Title>You're a Wizard {props.userName}</Title>
-      <Friends handleLocations={handleLocations} />
+      <Friends handleLocations={handleLocations} userName={props.userName} />
       </TopNavFriendStyle>
       )
   }
