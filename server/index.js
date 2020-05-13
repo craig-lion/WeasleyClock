@@ -38,10 +38,10 @@ app.post('/api/login', (req, res) => {
 })
 
 app.post('/api/updateLocations', (req, res) => {
-  // models.updateLocations(req.body)
-  // .then(
-  // console.log(`Locations Updated`),
-  // )
+  models.updateLocations(req.body.userName, req.body.locations)
+  .then(
+  console.log(`Locations Updated`),
+  )
   console.log('this is req', req.body)
   res.send('Kreatcher Hates Dobby')
 })
