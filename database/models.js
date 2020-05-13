@@ -18,9 +18,12 @@ const saveUser = (userName, password) => {
   })
 }
 
-const updateLocations = async (userName, locations) => {
-  await db.User.findOneAndUpdate({userName}, {locations})
-  console.log('it probably worked :shrug: ')
+const updateLocations = async (userName, currentLocation, locations) => {
+  if (locations) {
+    await db.User.findOneAndUpdate({userName}, {locations, currentLocation})
+  } else {
+    await db.User.findOneAndUpdate({userName}, { currentLocation })
+  }
 }
 
 const userInfo = async (userName, callback) => {

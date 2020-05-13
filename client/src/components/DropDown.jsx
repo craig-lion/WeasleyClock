@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 
@@ -17,7 +18,11 @@ const DropDown = (props) => {
 
   const moveArm = (e) => {
     console.log('e: ', e.target.value)
+    let post = {};
     props.setCurrentLocation(e.target.value)
+    post = { 'userName': props.userName, 'currentLocation': e.target.value },
+    console.log('this is post in the then: ', post)
+    axios.post('/api/updateLocations', post)
   }
   return (
     <>

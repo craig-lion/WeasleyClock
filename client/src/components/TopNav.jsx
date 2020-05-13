@@ -14,15 +14,15 @@ const TopNav = (props) => {
     let post = {};
     e.preventDefault();
     let updateDB = async () => {
-      const newLocations = [...props.locations, text];
+      let newLocations = [...props.locations, text];
       console.log('new Locations: ', newLocations)
       props.setLocations(newLocations);
+      props.setCurrentLocation(text)
       return newLocations
     }
     updateDB()
     .then((locations) => {
-
-      post = { locations, "userName": props.userName},
+      post = { locations, 'userName': props.userName, 'currentLocation': props.currentLocation },
       console.log('this is post in the then: ', post)
       axios.post('/api/updateLocations', post)
     }
@@ -30,10 +30,38 @@ const TopNav = (props) => {
     setText('');
   }
 
+  const handleRemove = (e) => {
+    let post = {};
+    e.preventDefault();
+    let updateDB = async () => {
+      const removeLocation = () => {
+        let array = [];
+        for (let i = 0; i < props.locations.length; i++) {
+          if (props.locations[i] === props.currentLocation) { continue; }
+          else {array.push(props.locations[i])}
+        }
+        return array;
+      };
+      let newLocations = removeLocation()
+      console.log('new locations array: ', newLocations)
+      props.setLocations(newLocations);
+      props.setCurrentLocation(newLocations[0])
+      return newLocations
+    }
+    updateDB()
+    .then((locations) => {
+
+      post = { locations, 'userName': props.userName, 'currentLocation': locations[0]},
+      console.log('this is post for Remove in the then: ', post)
+      axios.post('/api/updateLocations', post)
+    }
+    )
+  }
+
   return(
   <TopNavStyle>
   <Title>You're a Wizard {props.userName}</Title>
-  <DropDown setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
+  <DropDown userName={props.userName} setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
   <form onSubmit={handleSubmit}>
     <Div>
       <Label>Add A New Location</Label>
@@ -41,6 +69,7 @@ const TopNav = (props) => {
   <Text type="text" color='antiquewhite' id="location" value={text} onChange={e => setText(e.target.value)} name="location"></Text>
   <Div>
   <Button type="submit" value='Portus!'></Button>
+  <Button type="submit" value='Evanesco!' onClick={handleRemove}></Button>
   </Div>
   </form>
   </TopNavStyle>
