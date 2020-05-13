@@ -45,10 +45,11 @@ Weasley Clock App
           x attempt to create state hook
           x create drop down
           x updates location
-    - Can remove location
-      - create html button
-      - create onClick
-        - onClick updates locations
+    x Can remove location
+      x create html button
+      x create onClick
+      x  onClick updates locations
+
     - Can add text string status to location
 
     - Can create user profile
@@ -67,7 +68,16 @@ Weasley Clock App
       - link  for forgotten password
     
     - Can add friends
-      - Friends show up as new hands on the clock
+      x Add 'Manage Wizard Order' button
+      - Button toggles conditional formatting for friends management
+        x create Div to replace with friend management
+        x reate handleClick function for manage wizard order
+        - create friends management component
+          x create Manage locations button to return
+          x create handleClick function for manage locations
+          - 
+
+    - Can view friend's clock
     - Can create friend groups
       - Can filter which hands show by friend group
     

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import DropDown from './DropDown';
+import Friends from './Friends';
+import Locations from './Locations'
 const Styled = require('./Styles');
 
 // tried to implement styles in a separate file but it isn't working because it says it isn't "returning a string"
@@ -9,6 +11,7 @@ const Styled = require('./Styles');
 const TopNav = (props) => {
 
   const [text, setText] = useState('');
+  const [manageFriends, setManageFriends] = useState(false);
 
   const handleSubmit = (e) => {
     let post = {};
@@ -58,22 +61,44 @@ const TopNav = (props) => {
     )
   }
 
-  return(
-  <TopNavStyle>
-  <Title>You're a Wizard {props.userName}</Title>
-  <DropDown userName={props.userName} setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
-  <form onSubmit={handleSubmit}>
+  const handleFriends = (e) => {
+    e.preventDefault();
+    setManageFriends(true);
+  }
+
+  const handleLocations = (e) => {
+    e.preventDefault();
+    setManageFriends(false);
+  }
+
+  if (manageFriends === false) {
+    return(
+    <TopNavStyle>
+    <Title>You're a Wizard {props.userName}</Title>
+    <DropDown userName={props.userName} setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
+    <form onSubmit={handleSubmit}>
+      <Div>
+        <Label>Add A New Location</Label>
+      </Div>
+    <Text type="text" color='antiquewhite' id="location" value={text} onChange={e => setText(e.target.value)} name="location"></Text>
     <Div>
-      <Label>Add A New Location</Label>
+      <Button type="submit" value='Portus!'></Button>
+      <Button type="submit" value='Evanesco!' onClick={handleRemove}></Button>
+    <Div>
+      <Button type="submit" value='Manage Wizard Order!' onClick={handleFriends}></Button>
     </Div>
-  <Text type="text" color='antiquewhite' id="location" value={text} onChange={e => setText(e.target.value)} name="location"></Text>
-  <Div>
-  <Button type="submit" value='Portus!'></Button>
-  <Button type="submit" value='Evanesco!' onClick={handleRemove}></Button>
-  </Div>
-  </form>
-  </TopNavStyle>
-  )
+    </Div>
+    </form>
+    </TopNavStyle>
+    )
+  } else {
+    return (
+      <TopNavStyle>
+      <Title>You're a Wizard {props.userName}</Title>
+      <Friends handleLocations={handleLocations} />
+      </TopNavStyle>
+      )
+  }
 }
 
 const Div = styled.div`
