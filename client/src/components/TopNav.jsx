@@ -17,6 +17,7 @@ const TopNav = (props) => {
       let newLocations = [...props.locations, text];
       console.log('new Locations: ', newLocations)
       props.setLocations(newLocations);
+      props.setCurrentLocation(text)
       return newLocations
     }
     updateDB()
