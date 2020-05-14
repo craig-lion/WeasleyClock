@@ -27,6 +27,10 @@ const updateLocations = async (userName, currentLocation, locations) => {
   }
 }
 
+const updateFriends = async (userName, friends) => {
+  await db.User.findOneAndUpdate({userName}, { friends })
+}
+
 const userInfo = async (userName, callback) => {
   let query  = db.User.where({ userName });
   query.findOne((err, data) => {
@@ -56,4 +60,4 @@ const allUserNames = async (callback) => {
     })
 }
 
-module.exports = {saveUser, userInfo, updateLocations, login, allUserNames}
+module.exports = {saveUser, userInfo, updateLocations, login, allUserNames, updateFriends}

@@ -58,6 +58,11 @@ app.post('/api/updateLocations', (req, res) => {
   }
 })
 
+app.post('/api/updateFriends', (req, res) => {
+    models.updateFriends(req.cookies.session, req.body.friends)
+    .then(console.log('Friends Updated'))
+  })
+
 // Also really intreested to have you help with the below
 app.get('/api/users/:userName(\\w+)', (req, res) => {
 

@@ -9,13 +9,16 @@ const Friends = (props) => {
   const [friendsList, setFriendsList] = useState(props.friends);
 
   const addFriend = (e) => {
-    console.log('le clique add: ', e.target.getAttribute('value'))
+    let friends = [...friendsList, e.target.getAttribute('value')];
+    axios.post('/api/updateFriends', { friends })
+    setFriendsList(friends)
   }
   const removeFriend = (e) => {
-    console.log('le clique remove: ', e.target.getAttribute('value'))
+    let friends = friendsList.filter(location => location !== e.target.getAttribute('value'));
+    axios.post('/api/updateFriends', { friends })
+    setFriendsList(friends)
   }
   
- 
 
   const AllUsers =  () => {
     const removeFriends = () => {
