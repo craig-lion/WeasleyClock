@@ -81,7 +81,7 @@ const TopNav = (props) => {
       <Div>
         <Label>Add A New Location</Label>
       </Div>
-    <Text type="text" color='antiquewhite' id="location" value={text} onChange={e => setText(e.target.value)} name="location"></Text>
+    <Text type="text" color='white' id="location" value={text} onChange={e => setText(e.target.value)} name="location"></Text>
     <Div>
       <Button type="submit" value='Portus!'></Button>
       <Button type="submit" value='Evanesco!' onClick={handleRemove}></Button>

@@ -8,22 +8,42 @@ const Friends = (props) => {
   const [allUsersList, setAllUsersList] = useState(['']);
   const [friendsList, setFriendsList] = useState(props.friends);
 
+  const addFriend = (e) => {
+    console.log('le clique add: ', e.target.getAttribute('value'))
+  }
+  const removeFriend = (e) => {
+    console.log('le clique remove: ', e.target.getAttribute('value'))
+  }
+  
+ 
 
-  const AllUsers =  () => (
-      allUsersList.map(
+  const AllUsers =  () => {
+    const removeFriends = () => {
+      let array = []
+      for (let i = 0; i < allUsersList.length; i++) {
+        if (friendsList.includes(allUsersList[i])) { continue; }
+        else { array.push(allUsersList[i]); }
+      }
+      return array
+    }
+    let notFriends = removeFriends(allUsersList)
+    return (
+      notFriends.map(
         user => (
-        <div className="user" key={user}>{user}</div>
+        <li className="user" key={user} value={user} onClick={addFriend}>{user}</li>
         )
       )
-  ); 
+  )}; 
 
-  const Friends =  () => (
+  const Friends =  () => {
+    
+    return (
     friendsList.map(
       friend => (
-      <div className="friend" key={friend}>{friend}</div>
+      <li className="friend" key={friend} value={friend} onClick={removeFriend}>{friend}</li>
       )
     )
-  );
+  )};
   
   useEffect(() => {
     axios.get('/api/allUsers')
@@ -49,12 +69,16 @@ const Friends = (props) => {
       </Div>
       <Container>
         <Left>
-          All Wizard Names Go Here
-          <AllUsers />
+          <p>All Wizard Names Go Here</p>
+          <List>
+            <AllUsers />
+          </List>
         </Left>
         <Right>
           Wizards in Your Order Go Here
-          <Friends />
+          <List>
+            <Friends />
+          </List>
         </Right>
       </Container>
       <Div>
@@ -67,6 +91,7 @@ const Friends = (props) => {
 const Div = styled.div`
   padding:5px
 `
+
 const Container = styled.div`
   display:flex;
   flex-direction:row;
@@ -74,6 +99,7 @@ const Container = styled.div`
   height:250px;
   border: 2px solid;
 `
+
 const Left = styled.div`
   border:2px solid red;
   height:auto;
@@ -86,6 +112,9 @@ const Right = styled.div`
   width:auto;
 `
 
+const List = styled.ul`
+list-style-type: none;
+`
 
 const Label = styled.label`
   color:antiquewhite;

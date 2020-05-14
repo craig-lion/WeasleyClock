@@ -45,7 +45,7 @@ const Login = (props) => {
     <Div>
       <Label>What is your Wizard Name?</Label>
     </Div>
-  <Text type="text" color='antiquewhite' id="userName" value={userName} onChange={e => setUserName(e.target.value)} name="userName"></Text>
+  <Text type="text" color="red" id="userName" value={userName} onChange={e => setUserName(e.target.value)} name="userName"></Text>
   <Div>
       <Label>What is your Secret Spell?</Label>
     </Div>
