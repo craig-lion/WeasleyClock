@@ -80,9 +80,9 @@ app.get('/api/users/', (req, res) => {
 app.get('/api/allUsers', (req, res) => {
   let allUsers = {};
   let callback = (data) => {
-    oneUser = JSON.stringify(data)
+    allUsers = JSON.stringify(data)
     console.log('this is data: ', data)
-    res.send('allUsers')
+    res.send(allUsers)
   }
   models.allUserNames(callback);
 })

@@ -5,10 +5,11 @@ import axios from 'axios';
 const helper = require('./helper.js');
 
 const MainPage = (props) => {
-  const [locations, setLocations] = useState(['Lets Chill', '@ Work', 'Self Care', 'Adulting', 'Goin Down to Funky Town', 'Breathing Hard', 'On the Move', 'Lets Rage']);
+  const [locations, setLocations] = useState(['']);
   const radianUnit = 2*Math.PI / locations.length;
   const [userName, setUserName] = useState('');
   const [currentLocation, setCurrentLocation] = useState(()=> location[0]);
+  const [friends, setFriends] = useState([''])
 
   const createDimensions = (sideLength, padding) => {
   const obj = {
@@ -58,9 +59,11 @@ useEffect( () => {
     axios.get('/api/users')
   .then((res) => {
     let oneUser = res.data;
+    console.log('this is oneUser: ', oneUser)
     setLocations(oneUser.locations);
     setUserName(oneUser.userName);
     setCurrentLocation(oneUser.currentLocation)
+    setFriends(oneUser.friends)
   })
   .catch(err => {throw err;})
 },[]);
@@ -92,6 +95,7 @@ const allLocations = makeLocations(locations)
             locations={locations} 
             currentLocation={currentLocation} 
             setCurrentLocation={setCurrentLocation}
+            friends={friends}
           />
           <Bottom>
             <SVG overflow='auto' height={dimensions.componentSide} width={dimensions.componentSide}>

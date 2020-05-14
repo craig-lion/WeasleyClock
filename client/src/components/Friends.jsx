@@ -5,8 +5,8 @@ import axios from 'axios';
 const Friends = (props) => {
 
 
-  const [allUsersList, setAllUsersList] = useState(['Kimmy', 'Titus', 'Jane', 'Tina']);
-  const [friendsList, setFriendsList] = useState(['Harry', 'Ron', 'Hermionie']);
+  const [allUsersList, setAllUsersList] = useState(['']);
+  const [friendsList, setFriendsList] = useState(props.friends);
 
 
   const AllUsers =  () => (
@@ -28,8 +28,16 @@ const Friends = (props) => {
   useEffect(() => {
     axios.get('/api/allUsers')
     .then((res) => {
-      let allUsers = res.data;
+      let makeArray = () => {
+        console.log('this is res.data: ', res.data)
+        let array = res.data.map(
+          (obj) => { return obj.userName; } 
+        )
+        return array
+    } 
+      let allUsers = makeArray(res.data);
       console.log('this is res in Friends: ', allUsers)
+      setAllUsersList(allUsers)
     })
     .catch((err) => {throw err;})
   }, []);

@@ -72,6 +72,7 @@ const TopNav = (props) => {
   }
 
   if (manageFriends === false) {
+    console.log('this is props.friends in TopNAv: ', props.friends)
     return(
     <TopNavStyle>
     <Title>You're a Wizard {props.userName}</Title>
@@ -95,7 +96,7 @@ const TopNav = (props) => {
     return (
       <TopNavFriendStyle>
       <Title>You're a Wizard {props.userName}</Title>
-      <Friends handleLocations={handleLocations} userName={props.userName} />
+      <Friends friends={props.friends} handleLocations={handleLocations} userName={props.userName} />
       </TopNavFriendStyle>
       )
   }
