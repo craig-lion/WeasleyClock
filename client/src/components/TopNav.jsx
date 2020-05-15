@@ -72,10 +72,10 @@ const TopNav = (props) => {
   }
 
   if (manageFriends === false) {
-    console.log('this is props.friends in TopNAv: ', props.friends)
     return(
     <TopNavStyle>
     <Title>You're a Wizard {props.userName}</Title>
+    <Button type="submit" value='Change Wizard!' onClick={props.logout}></Button>
     <DropDown userName={props.userName} setCurrentLocation={props.setCurrentLocation} currentLocation={props.currentLocation} locations={props.locations} />
     <form onSubmit={handleSubmit}>
       <Div>
@@ -96,6 +96,7 @@ const TopNav = (props) => {
     return (
       <TopNavFriendStyle>
       <Title>You're a Wizard {props.userName}</Title>
+      <Button type="submit" value='Change Wizard!' onClick={props.logout}></Button>
       <Friends friends={props.friends} handleLocations={handleLocations} userName={props.userName} />
       </TopNavFriendStyle>
       )
@@ -110,12 +111,13 @@ const TopNavStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 175px;
+  height: 200px;
   width: 100vw;
   background-image: url('darkWood.jpg');
   text-align: center;
   padding:5px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  // position:absolute;
   `
 
   const TopNavFriendStyle = styled.div`
@@ -128,6 +130,7 @@ const TopNavStyle = styled.div`
   text-align: center;
   padding:5px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  // postion:absolute;
   `
 
 const Text = styled.input`

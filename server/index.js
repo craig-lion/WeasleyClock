@@ -4,6 +4,10 @@ const models = require ('../database/models.js');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 734;
+const options = {
+  maxAge: 2.592e+9,
+  httpOnly: true,
+}
 
 app.use(express.json())
 app.use(cookieParser())
@@ -31,12 +35,7 @@ app.post('/api/login', (req, res) => {
   models.login(req.body.userName, req.body.password)
   .then((userName) => {
     if (userName) {
-      const options = {
-        maxAge: 2.592e+9,
-        httpOnly: true,
-      }
       res.cookie('session', `${userName}`, options)
-      console.log('this is userName: ', userName)
       res.send(true)
       console.log('successful login')
     } else {
@@ -69,7 +68,11 @@ app.get('/api/users/:userName(\\w+)', (req, res) => {
   res.redirect(`/?userName=${req.params.userName}`)
 })
 
-// must fix get so it requests user from Login 
+app.get('/api/login', (req,res) => {
+  if(req.cookies.session) {
+    res.send(true)
+  } else { res.send(false); }
+})
 
 app.get('/api/users/', (req, res) => {
   let oneUser = {};
@@ -90,6 +93,13 @@ app.get('/api/allUsers', (req, res) => {
     res.send(allUsers)
   }
   models.allUserNames(callback);
+})
+
+app.delete('/api/logout', (req, res) => {
+  console.log('delete')
+  res.clearCookie('session', options)
+  res.send(false)
+
 })
 
 app.listen(port, () => console.log(`Sorting Hat is listening on ${port}`))

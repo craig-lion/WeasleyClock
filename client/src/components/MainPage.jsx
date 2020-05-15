@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import TopNav from './TopNav';
+import CenterpieceDropDown from './CenterpieceDropDown';
 import axios from 'axios';
 const helper = require('./helper.js');
 
@@ -9,7 +10,8 @@ const MainPage = (props) => {
   const radianUnit = 2*Math.PI / locations.length;
   const [userName, setUserName] = useState('');
   const [currentLocation, setCurrentLocation] = useState(()=> location[0]);
-  const [friends, setFriends] = useState([''])
+  const [friends, setFriends] = useState(['']);
+  const [surpress, setSurpress] = useState(false);
 
   const createDimensions = (sideLength, padding) => {
   const obj = {
@@ -84,6 +86,15 @@ const Arm = () => {
   />
 )}
 
+const Centerpiece = () => {
+  return (
+  <DropDownStyle>
+  <Text fill='antiquewhite' textAnchor="middle">
+    Appare Vestigium
+  </Text>
+  </DropDownStyle>
+  )}
+
 const allLocations = makeLocations(locations)
 
     return (
@@ -96,18 +107,45 @@ const allLocations = makeLocations(locations)
             currentLocation={currentLocation} 
             setCurrentLocation={setCurrentLocation}
             friends={friends}
+            logout={props.logout}
+            suppress={surpress}
+            setSurpress={setSurpress}
           />
           <Bottom>
+            <ClockToggle>
+              <Centerpiece
+                  friends={friends}
+                  userName={userName}
+                  x={circle.centerX}
+                  y={circle.centerY}
+                  setSurpress={setSurpress}
+                  setLoginUserName={props.setLoginUserName}
+                />
+            </ClockToggle>
             <SVG overflow='auto' height={dimensions.componentSide} width={dimensions.componentSide}>
               <Arm />
               <Circle cx={circle.centerX} cy={circle.centerY} r={circle.radius} fill="rgba(204, 204, 204, 0.25)" stroke="tan" strokeWidth="2" />
-              <Text fill='antiquewhite' textAnchor="middle" x={circle.centerX} y={circle.centerY}>Appare Vestigium</Text>
               {allLocations}
             </SVG>
           </Bottom>
         </>
     );
 };
+
+const DropDownStyle = styled.div`
+position: absolute;
+width: 150px;
+height:150px;
+border:2px solid green;
+`
+const ClockToggle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  height:100%;
+  width:100vw;
+  position:absolute;
+`
 
 const Text = styled.text`
   font-size:30px;
@@ -119,9 +157,9 @@ const Text = styled.text`
 const Bottom = styled.div`
   display: flex;
   justify-content: center;
-  height:-webkit-fill-available;
   width:100vw;
   background-image: url('Burrow.jpg');
+  position:relative;
 `
 
 const SVG = styled.svg`
