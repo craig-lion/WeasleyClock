@@ -11,7 +11,7 @@ const MainPage = (props) => {
   const [userName, setUserName] = useState('');
   const [currentLocation, setCurrentLocation] = useState(()=> location[0]);
   const [friends, setFriends] = useState(['']);
-  const [surpress, setSurpress] = useState(false);
+  const [suppress, setSuppress] = useState(false);
 
   const createDimensions = (sideLength, padding) => {
   const obj = {
@@ -108,25 +108,27 @@ const allLocations = makeLocations(locations)
             setCurrentLocation={setCurrentLocation}
             friends={friends}
             logout={props.logout}
-            suppress={surpress}
-            setSurpress={setSurpress}
+            suppress={suppress}
+            setSuppress={setSuppress}
           />
           <Bottom>
-            <ClockToggle>
-              <Centerpiece
-                  friends={friends}
-                  userName={userName}
-                  x={circle.centerX}
-                  y={circle.centerY}
-                  setSurpress={setSurpress}
-                  setLoginUserName={props.setLoginUserName}
-                />
-            </ClockToggle>
             <SVG overflow='auto' height={dimensions.componentSide} width={dimensions.componentSide}>
               <Arm />
               <Circle cx={circle.centerX} cy={circle.centerY} r={circle.radius} fill="rgba(204, 204, 204, 0.25)" stroke="tan" strokeWidth="2" />
               {allLocations}
             </SVG>
+            <ClockToggle>
+              <CenterpieceDropDown
+                  friends={friends}
+                  userName={userName}
+                  x={circle.centerX}
+                  y={circle.centerY}
+                  setSuppress={setSuppress}
+                  setLoginUserName={props.setLoginUserName}
+                  setLocations={setLocations}
+                  setCurrentLocation={setCurrentLocation}
+                />
+            </ClockToggle>
           </Bottom>
         </>
     );
@@ -163,14 +165,14 @@ const Bottom = styled.div`
 `
 
 const SVG = styled.svg`
-  background: rgba(204, 204, 204, 0.25);
+  background: rgba(204, 204, 204, 0.15);
   border-radius: 50%;
   overflow: visible;
   white-space: nowrap;
   position:relative;
 `
 const Circle = styled.circle`
-  background: rgba(204, 204, 204, 0.5);
+  background: rgba(204, 204, 204, 0);
 `
 
 export default MainPage

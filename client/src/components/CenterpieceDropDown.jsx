@@ -4,29 +4,34 @@ import styled from 'styled-components';
 
 
 const CenterpieceDropDown = (props) => {
+  console.log('this is friends prop: ', props.friends)
   const clocks = props.friends.map((friend) => {
-      return (
-        <Select id="clocks" onChange={changeClock}>{friend}</Select> 
-      )
+      console.log('this is a friend in drop: ', friend)
+        return (
+          <Option key={friend} width="20px" value={friend} >{friend}</Option>
+          )
   })
 
   const changeClock = (e) => {
     console.log('yeah buddy')
-  //   axios.get('/api/users')
-  //   .then((res) => {
-  //   let oneUser = res.data;
-  //   console.log('this is oneUser: ', oneUser)
-  //   props.setLocations(oneUser.locations);
-  //   props.setCurrentLocation(oneUser.currentLocation)
-  //   props.setSurpress(true)
-  // })
-  // .catch(err => {throw err;})
+    let userName = e.target.value
+    console.log('this is userName in DorpDown: ', userName)
+    axios.get('/api/users', {params:{userName}})
+    .then((res) => {
+    let oneUser = res.data;
+    console.log('this is oneUser: ', oneUser)
+    props.setLocations(oneUser.locations);
+    props.setCurrentLocation(oneUser.currentLocation)
+    props.setSuppress(true)
+  })
+  .catch(err => {throw err;})
   }
   return (
-
     <DropDownStyle>
       <Label>Viewing {props.userName}'s Clock</Label>
+      <Select id="clocks" onChange={changeClock}>
       {clocks}
+      </Select>
     </DropDownStyle>
   )
 }
@@ -35,17 +40,32 @@ const Label = styled.label`
   color:antiquewhite;
 `
 const DropDownStyle = styled.div`
-position: absolute;
-width: 150px;
-height:150px;
-border:2px solid green;
+  align-items:center;
+  position: absolute;
+  width: 300px;
+  height:150px;
+  border-radius:18px;
+  color:antiquewhite;
+  // opacity: 50%;
+  border-radius:18px;
+  text-align: center;
+  text-align-last: center;
+  font-size:30px;
+  -moz-text-align-last: center;
+  font-family: 'Luminari';
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+`
+
+const Option = styled.option`
+  width: 100%;
+  
 `
 
 const Select = styled.select`
   color:antiquewhite;
-  background-image: url('darkWood.jpg');
-  opacity: 50%;
+  background: rgba(0,0,0,0.15);
   border-radius:18px;
+  font-size:12px;
   text-align: center;
   text-align-last: center;
   -moz-text-align-last: center;

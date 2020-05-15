@@ -52,7 +52,9 @@ const Login = (props) => {
   <Text type="text" color='antiquewhite' id="password" value={password} onChange={e => setPassword(e.target.value)} name="password"></Text>
   <Div>
   <Button type="submit" value="Y'all Know Who I Am" onClick={handleSubmit}></Button>
-    <Button type="submit" value="New Wiz" onClick={handleNewUser}></Button>
+  </Div>
+  <Div>
+  <Button type="submit" value="New Wiz" onClick={handleNewUser}></Button>
   </Div>
   </form>
   </LoginStyle>
@@ -66,6 +68,11 @@ const Title = styled.p`
 
 const Div = styled.div`
   padding:5px
+  text-align: center;
+  text-align-last: center;
+  font-size:30px;
+  -moz-text-align-last: center;
+  font-family: 'Luminari';
 `
 
 const LoginStyle = styled.div`
@@ -81,6 +88,10 @@ const Text = styled.input`
   background-image: url('darkWood.jpg');
   border-radius:18px;
   border-color:antiqueWhite;
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
+  font-family: 'Luminari';
 `
 
 const Label = styled.label`

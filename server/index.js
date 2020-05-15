@@ -81,7 +81,7 @@ app.get('/api/users/', (req, res) => {
     res.send(oneUser)
   }
   console.log('we did it all for these cookies: ', req.cookies.session)
-  let userName = req.body.userName || req.cookies.session
+  let userName = req.query.userName || req.cookies.session
   models.userInfo( userName, callback);
 })
 

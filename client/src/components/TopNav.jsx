@@ -71,6 +71,27 @@ const TopNav = (props) => {
     setManageFriends(false);
   }
 
+const returnToClock = () => {
+  console.log('YEAH BUDDY')
+    axios.get('/api/users')
+    .then((res) => {
+    let oneUser = res.data;
+    console.log('this is oneUser: ', oneUser)
+    props.setLocations(oneUser.locations);
+    props.setCurrentLocation(oneUser.currentLocation)
+    props.setSuppress(false)
+  })
+  .catch(err => {throw err;})
+}
+
+  if (props.suppress) {
+    return(
+      <TopNavOtherClockStyle>
+        <Title>You're a Wizard {props.userName}</Title>
+        <Button type="submit" value='Return to Your Clock!' onClick={returnToClock}></Button>
+      </TopNavOtherClockStyle>
+    )
+  }
   if (manageFriends === false) {
     return(
     <TopNavStyle>
@@ -117,7 +138,6 @@ const TopNavStyle = styled.div`
   text-align: center;
   padding:5px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-  // position:absolute;
   `
 
   const TopNavFriendStyle = styled.div`
@@ -130,7 +150,18 @@ const TopNavStyle = styled.div`
   text-align: center;
   padding:5px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-  // postion:absolute;
+  `
+  const TopNavOtherClockStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100px;
+  width: 100vw;
+  background-image: url('darkWood.jpg');
+  text-align: center;
+  padding:5px;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  // position:absolute;
   `
 
 const Text = styled.input`
