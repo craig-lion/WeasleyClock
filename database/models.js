@@ -10,7 +10,6 @@ const saveUser = (userName, password) => {
     currentLocation: 'Let\'s Rage',
     friends: ['Lion']
   });
-  console.log('this is newUser in models: ', newUser)
   return new Promise ((resolve, reject) => {
     newUser.save((err) => {
     if (err) {reject(err)}

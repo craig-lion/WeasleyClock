@@ -18,7 +18,6 @@ const TopNav = (props) => {
     e.preventDefault();
     let updateDB = async () => {
       let newLocations = [...props.locations, text];
-      console.log('new Locations: ', newLocations)
       props.setLocations(newLocations);
       props.setCurrentLocation(text)
       return newLocations
@@ -26,7 +25,6 @@ const TopNav = (props) => {
     updateDB()
     .then((locations) => {
       post = { locations, 'userName': props.userName, 'currentLocation': props.currentLocation },
-      console.log('this is post in the then: ', post)
       axios.post('/api/updateLocations', post)
     }
     )
@@ -46,16 +44,13 @@ const TopNav = (props) => {
         return array;
       };
       let newLocations = removeLocation()
-      console.log('new locations array: ', newLocations)
       props.setLocations(newLocations);
       props.setCurrentLocation(newLocations[0])
       return newLocations
     }
     updateDB()
     .then((locations) => {
-
       post = { locations, 'userName': props.userName, 'currentLocation': locations[0]},
-      console.log('this is post for Remove in the then: ', post)
       axios.post('/api/updateLocations', post)
     }
     )
@@ -72,11 +67,9 @@ const TopNav = (props) => {
   }
 
 const returnToClock = () => {
-  console.log('YEAH BUDDY')
     axios.get('/api/users')
     .then((res) => {
     let oneUser = res.data;
-    console.log('this is oneUser: ', oneUser)
     props.setLocations(oneUser.locations);
     props.setCurrentLocation(oneUser.currentLocation)
     props.setSuppress(false)

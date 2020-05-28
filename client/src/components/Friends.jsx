@@ -52,14 +52,12 @@ const Friends = (props) => {
     axios.get('/api/allUsers')
     .then((res) => {
       let makeArray = () => {
-        console.log('this is res.data: ', res.data)
         let array = res.data.map(
           (obj) => { return obj.userName; } 
         )
         return array
     } 
       let allUsers = makeArray(res.data);
-      console.log('this is res in Friends: ', allUsers)
       setAllUsersList(allUsers)
     })
     .catch((err) => {throw err;})

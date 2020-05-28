@@ -15,7 +15,6 @@ const Login = (props) => {
     .then((result) => {
       if(result.data === false) {alert('Login Failed')}
       else {
-      console.log('this is results.data in Login: ', result.data)
       let sendUser = async () => {
         props.setLoginUserName(result.data)
       }
@@ -31,7 +30,6 @@ const Login = (props) => {
     let query = {userName, password};
     axios.post('/api/addUser', query)
     .then((result) => {
-      // console.log('this is result: ', result)
       props.setIsLoggedIn(true);
     })
     setUserName('');

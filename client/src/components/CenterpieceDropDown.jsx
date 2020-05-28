@@ -4,22 +4,17 @@ import styled from 'styled-components';
 
 
 const CenterpieceDropDown = (props) => {
-  console.log('this is friends prop: ', props.friends)
   const clocks = props.friends.map((friend) => {
-      console.log('this is a friend in drop: ', friend)
         return (
           <Option key={friend} width="20px" value={friend} >{friend}</Option>
           )
   })
 
   const changeClock = (e) => {
-    console.log('yeah buddy')
     let userName = e.target.value
-    console.log('this is userName in DorpDown: ', userName)
     axios.get('/api/users', {params:{userName}})
     .then((res) => {
     let oneUser = res.data;
-    console.log('this is oneUser: ', oneUser)
     props.setLocations(oneUser.locations);
     props.setCurrentLocation(oneUser.currentLocation)
     props.setSuppress(true)

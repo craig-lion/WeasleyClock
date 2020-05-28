@@ -14,7 +14,7 @@ const App = () => {
   }, [])
 
   const logout = () => {
-    axios.delete('/api/logout').then(res => setIsLoggedIn(res.data)).then(console.log('isLoggedIn:', isLoggedIn))
+    axios.delete('/api/logout').then(res => setIsLoggedIn(res.data))
   }
 
   if (isLoggedIn === false) {

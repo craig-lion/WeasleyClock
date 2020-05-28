@@ -20,15 +20,12 @@ app.post('/api/addUser', (req, res) => {
     (newUser) => {
       if (newUser) {
         res.send(true)
-        console.log(`User: ${req.body.userName} Added`)
       } else {
         res.send(false)
-        console.log('Account Creation Failed')
       }
     }
   )
   .catch(err => console.log(err))
-  res.send('Dobby is a Good House Elf Sir')
 })
 // pass back userName and use it in useEffect query
 app.post('/api/login', (req, res) => {
@@ -37,10 +34,8 @@ app.post('/api/login', (req, res) => {
     if (userName) {
       res.cookie('session', `${userName}`, options)
       res.send(true)
-      console.log('successful login')
     } else {
       res.send(false)
-      console.log('failed login')
     }
   })
   .catch(err => console.log(err))
@@ -80,7 +75,6 @@ app.get('/api/users/', (req, res) => {
     oneUser = JSON.stringify(data)
     res.send(oneUser)
   }
-  console.log('we did it all for these cookies: ', req.cookies.session)
   let userName = req.query.userName || req.cookies.session
   models.userInfo( userName, callback);
 })
@@ -89,7 +83,6 @@ app.get('/api/allUsers', (req, res) => {
   let allUsers = {};
   let callback = (data) => {
     allUsers = JSON.stringify(data)
-    console.log('this is data: ', data)
     res.send(allUsers)
   }
   models.allUserNames(callback);
