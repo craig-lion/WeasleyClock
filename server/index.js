@@ -52,6 +52,12 @@ app.post('/api/updateLocations', (req, res) => {
   }
 })
 
+app.post('/api/logout', (req, res) => {
+  console.log('delete')
+  res.clearCookie('session', options)
+  res.send(false)
+})
+
 app.post('/api/updateFriends', (req, res) => {
     models.updateFriends(req.cookies.session, req.body.friends)
     .then(console.log('Friends Updated'))
@@ -88,12 +94,6 @@ app.get('/api/allUsers', (req, res) => {
   models.allUserNames(callback);
 })
 
-app.delete('/api/logout', (req, res) => {
-  console.log('delete')
-  res.clearCookie('session', options)
-  res.send(false)
-
-})
 
 app.listen(port, () => console.log(`Sorting Hat is listening on ${port}`))
 
