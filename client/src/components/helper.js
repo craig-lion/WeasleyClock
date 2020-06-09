@@ -16,7 +16,7 @@ where you need to run this equation for t taking values within
  the range from 0 to 360, then you will get your x and y each on the boundary of the circle.
 */
 
-const getPointsOnCircle = (origin, radius, radian) => {
+const getPointOnCircle = (origin, radius, radian) => {
   const array = [];
   const x = (radius * Math.cos(radian) + origin[0]);
   const y = (radius * Math.sin(radian) + origin[1]);
@@ -24,4 +24,4 @@ const getPointsOnCircle = (origin, radius, radian) => {
   return array;
 }
 
-exports.getPointsOnCircle = getPointsOnCircle;
+exports.getPointOnCircle = getPointOnCircle;

@@ -106,6 +106,18 @@ Weasley Clock App
       - front-end updates DB
         - create post req for updating locations
         - create post route to db
+  
+  * Refactor Number 1
+    - Move SVG, Arm, and Circle into new componnent called ClockFace
+  
+  * Create Test Suite
+    x Reset Jest/Enzyme knowledge
+    - Setup environment
+    - Decide what should be tested
+    - Successfully write 1 test
+    - Successfully run 1 test
+    - Finish writing tests
+    - Confirm all tests are working successfully
 
 
   * Intermediate Requirements
