@@ -1,3 +1,3 @@
-//test(description, fn)
+// test(description, fn)
 
-test ('getPointsOnCircle  ', )
+// test ('getPointsOnCircle  ', )
