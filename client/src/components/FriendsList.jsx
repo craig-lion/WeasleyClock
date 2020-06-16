@@ -13,12 +13,12 @@ const FriendsList = (props) => {
   const addFriend = (e) => {
     const newFriends = [...friendsList, e.target.getAttribute('value')];
     axios.post('/api/updateFriends', { friends: newFriends });
-    setFriendsList(friends);
+    setFriendsList(newFriends);
   };
   const removeFriend = (e) => {
     const lessFriends = friendsList.filter((location) => location !== e.target.getAttribute('value'));
     axios.post('/api/updateFriends', { friends: lessFriends });
-    setFriendsList(friends);
+    setFriendsList(lessFriends);
   };
 
   const notFriends = allUsersList.filter((friend) => (!friendsList.includes(friend)));

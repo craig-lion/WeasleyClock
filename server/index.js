@@ -84,6 +84,7 @@ app.post('/api/logout', checkForLogin((req, res) => {
 }));
 
 app.post('/api/updateFriends', checkForLogin((req) => {
+  console.log('this is req.body.friends: ', req.body.friends);
   models.updateFriends(req.cookies.session, req.body.friends)
     .then(console.log('Friends Updated'));
 }));
@@ -98,7 +99,7 @@ app.get('/api/userInfo/', (req, res) => {
   models.userInfo(userName, callback);
 });
 
-app.get('/api/allUsers', (res) => {
+app.get('/api/allUsers', (req, res) => {
   let allUsers = {};
   const callback = (data) => {
     allUsers = JSON.stringify(data);
