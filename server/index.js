@@ -16,6 +16,13 @@ app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../client', 'public')));
 
+const checkForLogin = (endpointFunc) => (
+  (req, res) => {
+    if (req.cookies.session) {
+      endpointFunc(req, res);
+    } else { res.send(403); }
+  });
+
 app.post('/api/addUser', (req, res) => {
   models.saveUser(req.body.userName, req.body.password)
     .then(
@@ -27,11 +34,25 @@ app.post('/api/addUser', (req, res) => {
         }
       },
     )
-    .catch((err) => console.log(err));
+    .catch(
+      (err) => {
+        console.log(err);
+        return res.status(400).send({
+          message: 'This is an error!',
+        });
+      },
+    );
 });
 
-
 app.post('/api/login', (req, res) => {
+  if (req.cookies.session) {
+    res.send(true);
+    return;
+  }
+  if (!req.body.userName || !req.body.password) {
+    res.send(false);
+    return;
+  }
   models.login(req.body.userName, req.body.password)
     .then((userName) => {
       if (userName) {
@@ -44,41 +65,30 @@ app.post('/api/login', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post('/api/updateLocations', (req) => {
+app.post('/api/updateLocations', checkForLogin((req) => {
   if (req.body.locations) {
-    models.updateLocations(req.body.userName, req.body.currentLocation, req.body.locations)
+    models.updateLocations(req.cookies.session, req.body.currentLocation, req.body.locations)
       .then(
         console.log('Locations Updated'),
       );
   } else {
-    models.updateLocations(req.body.userName, req.body.currentLocation)
+    models.updateLocations(req.cookies.session, req.body.currentLocation)
       .then(console.log('currentLocation only Updated'));
   }
-});
+}));
 
-app.post('/api/logout', (req, res) => {
+app.post('/api/logout', checkForLogin((req, res) => {
   console.log('delete');
   res.clearCookie('session', options);
   res.send(false);
-});
+}));
 
-app.post('/api/updateFriends', (req) => {
+app.post('/api/updateFriends', checkForLogin((req) => {
   models.updateFriends(req.cookies.session, req.body.friends)
     .then(console.log('Friends Updated'));
-});
+}));
 
-// Also really intreested to have you help with the below
-app.get('/api/users/:userName(\\w+)', (req, res) => {
-  res.redirect(`/?userName=${req.params.userName}`);
-});
-
-app.get('/api/login', (req, res) => {
-  if (req.cookies.session) {
-    res.send(true);
-  } else { res.send(false); }
-});
-
-app.get('/api/users/', (req, res) => {
+app.get('/api/userInfo/', (req, res) => {
   let oneUser = {};
   const callback = (data) => {
     oneUser = JSON.stringify(data);
@@ -96,6 +106,5 @@ app.get('/api/allUsers', (res) => {
   };
   models.allUserNames(callback);
 });
-
 
 app.listen(port, () => console.log(`Sorting Hat is listening on ${port}`));

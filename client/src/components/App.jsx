@@ -9,29 +9,32 @@ const App = () => {
   const [loginUserName, setLoginUserName] = useState('');
 
   useEffect(() => {
-    axios.get('/api/login').then((res) => setIsLoggedIn(res.data));
+    axios.post('/api/login').then((res) => setIsLoggedIn(res.data));
   }, []);
 
   const logout = () => {
     axios.post('/api/logout').then((res) => setIsLoggedIn(res.data));
   };
 
-  if (isLoggedIn === false) {
+  if (isLoggedIn) {
     return (
-      <Col>
-        <Login setLoginUserName={setLoginUserName} setIsLoggedIn={setIsLoggedIn} />
-      </Col>
+      <Centered>
+        <Col>
+          <MainPage
+            logout={logout}
+            currentUser={loginUserName}
+            setLoginUserName={setLoginUserName}
+          />
+        </Col>
+      </Centered>
     );
   }
   return (
-    <Centered>
-      <Div>
-        <Button type="submit" value="Change Wizard!" onClick={logout} />
-      </Div>
+    <Background>
       <Col>
-        <MainPage logout={logout} currentUser={loginUserName} setLoginUserName={setLoginUserName} />
+        <Login setLoginUserName={setLoginUserName} setIsLoggedIn={setIsLoggedIn} />
       </Col>
-    </Centered>
+    </Background>
   );
 };
 
@@ -41,22 +44,21 @@ const Col = styled.div`
   align-items: center;
   font-family: 'Luminari';
   color: AntiqueWhite;
+  background-image: url('darkWood.jpg');
+`;
+
+const Background = styled.div`
+  background-image: url('darkWood.jpg');
+  width:100wv;
+  height: 100%;
 `;
 
 const Centered = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-const Button = styled.input`
-  color:AntiqueWhite;
+  width:100vw;
   background-image: url('darkWood.jpg');
-  opacity: 50%;
-  border-radius:18px;
-`;
-
-const Div = styled.div`
-  padding:5px
 `;
 
 export default App;

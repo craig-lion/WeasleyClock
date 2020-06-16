@@ -9,15 +9,15 @@ import ClockFace from './ClockFace';
 const helper = require('./helper.js');
 
 const MainPage = (props) => {
-  const [locations, setLocations] = useState(['']);
+  const [locations, setLocations] = useState([]);
   const [userName, setUserName] = useState('');
   const [currentLocation, setCurrentLocation] = useState(() => locations[0]);
-  const [friends, setFriends] = useState(['']);
+  const [friends, setFriends] = useState([]);
   const [suppress, setSuppress] = useState(false);
   const { logout, setLoginUserName } = props;
 
   useEffect(() => {
-    axios.get('/api/users')
+    axios.get('/api/userInfo')
       .then((res) => {
         const oneUser = res.data;
         setLocations(oneUser.locations);
@@ -80,8 +80,10 @@ const ClockToggle = styled.div`
 const Bottom = styled.div`
   display: flex;
   justify-content: center;
-  width:100vw;
-  background-image: url('Burrow.jpg');
+  width:auto;
+  background-image: url('parchment.png');
+  border-radius:350px;
+  background-size:100%;
   position:relative;
 `;
 

@@ -108,7 +108,37 @@ Weasley Clock App
         - create post route to db
   
   * Refactor Number 1
-    - Move SVG, Arm, and Circle into new componnent called ClockFace
+    x Move SVG, Arm, and Circle into new componnent called ClockFace
+    x install and init linter
+    x lint all files
+    x Move Styles into separate file
+      x import 1 style from styles.js
+    x Fix server routes
+    - Fix user authentication
+
+    Bottom - MainPage
+    * Button - App, TopNav, Button, Login
+    ClockToggle - MainPage
+    Col - App
+    Container - FriendsList
+    Centered - App
+    Circle - ClockFace
+    * Div - App, TopNav, FriendsList, Login
+    DropDownStyle - CenterpieceDropDown
+    * Label - TopNav, TopNavDropDown, FriendsList, Login
+    Left - FriendsList
+    List - FriendsList
+    LoginStyle - Login
+    Option - CenterpieceDropDown
+    Right - FriendsList
+    * Select - CenterpieceDropDown, TopNavDropDown
+    SVG - ClockFace
+    * Text - TopNav, ClockFace, LoginStyle
+    Title - TopNav, Login
+    TopNavFriendStyle - TopNav
+    TopNaveOtherClockStyle - TopNav
+    TopNavStyle - TopNav
+
   
   * Create Test Suite
     x Reset Jest/Enzyme knowledge

@@ -8,7 +8,7 @@ const TopNavStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 175px;
+  height: 200px;
   width: 100vw;
   background-image: url('darkWood.jpg');
   text-align: center;

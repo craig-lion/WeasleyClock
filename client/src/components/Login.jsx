@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+
 const Login = (props) => {
   const { setLoginUserName, setIsLoggedIn } = props;
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
 
   const handleSubmit = (e) => {
@@ -17,10 +18,8 @@ const Login = (props) => {
         if (result.data === false) {
           alert('Login Failed');
         } else {
-          const sendUser = async () => {
-            setLoginUserName(result.data);
-          };
-          sendUser().then(setIsLoggedIn(true));
+          setLoginUserName(userName);
+          setIsLoggedIn(true);
         }
       });
     setUserName('');
@@ -32,7 +31,7 @@ const Login = (props) => {
     const query = { userName, password };
     axios.post('/api/addUser', query)
       .then(() => {
-        props.setIsLoggedIn(true);
+        setIsLoggedIn(true);
       });
     setUserName('');
     setPassword('');
@@ -51,10 +50,10 @@ const Login = (props) => {
         </Div>
         <Text type="text" color="antiquewhite" id="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
         <Div>
-          <Button type="submit" value="Y'all Know Who I Am" onClick={handleSubmit} />
+          <Button type="submit" id="knownUser" value="Known Wizard" onClick={handleSubmit} />
         </Div>
         <Div>
-          <Button type="submit" value="New Wiz" onClick={handleNewUser} />
+          <Button type="submit" id="newUser" value="New Wizard" onClick={handleNewUser} />
         </Div>
       </form>
     </LoginStyle>

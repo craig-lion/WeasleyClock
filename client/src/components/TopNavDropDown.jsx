@@ -28,25 +28,39 @@ const TopNavDropDown = (props) => {
   };
 
   return (
-    <>
+    <TopNavDropDownStyle>
       <Label>Where are you?</Label>
       <Select id="locations" onChange={moveArm}>
         {locations}
       </Select>
-    </>
+    </TopNavDropDownStyle>
   );
 };
 
 TopNavDropDown.propTypes = {
   setCurrentLocation: PropTypes.func.isRequired,
   userName: PropTypes.string.isRequired,
-  currentLocation: PropTypes.string.isRequired,
+  currentLocation: PropTypes.string,
   allLocations: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+TopNavDropDown.defaultProps = {
+  currentLocation: null,
 };
 
 const Label = styled.label`
   color:antiquewhite;
+  font-size:20px;
 `;
+
+const TopNavDropDownStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding:5px;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  `;
 
 const Select = styled.select`
   color:antiquewhite;

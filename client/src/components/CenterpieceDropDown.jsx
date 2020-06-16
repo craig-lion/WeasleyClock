@@ -14,20 +14,21 @@ const CenterpieceDropDown = (props) => {
   ));
 
   const changeClock = (e) => {
-    axios.get('/api/users', { params: { userName: e.target.value } })
+    axios.get('/api/userInfo', { params: { userName: e.target.value } })
       .then((res) => {
-        const oneUser = res.data;
-        setLocations(oneUser.locations);
-        setCurrentLocation(oneUser.currentLocation);
+        const user = res.data;
+        setLocations(user.locations);
+        setCurrentLocation(user.currentLocation);
         setSuppress(true);
       })
       .catch((err) => { throw err; });
   };
+
+  const title = `Viewing ${userName}'s Clock`;
   return (
     <DropDownStyle>
       <Label>
-        Viewing
-        {userName}
+        {title}
       </Label>
       <Select id="clocks" onChange={changeClock}>
         {clocks}
@@ -46,16 +47,19 @@ CenterpieceDropDown.propTypes = {
 
 const Label = styled.label`
   color:antiquewhite;
+  font-size:35px;
+  position:relative;
 `;
 
 const DropDownStyle = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items:center;
   position: absolute;
   width: 300px;
   height:150px;
   border-radius:18px;
   color:antiquewhite;
-  // opacity: 50%;
   border-radius:18px;
   text-align: center;
   text-align-last: center;
@@ -72,8 +76,9 @@ const Option = styled.option`
 const Select = styled.select`
   color:antiquewhite;
   background: rgba(0,0,0,0.15);
+  position:relative;
   border-radius:18px;
-  font-size:12px;
+  font-size:18px;
   text-align: center;
   text-align-last: center;
   -moz-text-align-last: center;

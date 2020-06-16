@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const FriendsList = (props) => {
   const { handleLocations, friends } = props;
 
-  const [allUsersList, setAllUsersList] = useState(['']);
+  const [allUsersList, setAllUsersList] = useState([]);
   const [friendsList, setFriendsList] = useState(friends);
 
   const addFriend = (e) => {
@@ -21,37 +21,27 @@ const FriendsList = (props) => {
     setFriendsList(friends);
   };
 
-  const AllUsers = () => {
-    // const removeFriends = () => {
-    //   const array = [];
-    //   for (let i = 0; i < allUsersList.length; i += 1) {
-    //     if (!friendsList.includes(allUsersList[i])) { array.push(allUsersList[i]); }
-    //   }
-    //   return array;
-    // };
+  const notFriends = allUsersList.filter((friend) => (!friendsList.includes(friend)));
 
-    const notFriends = allUsersList.filter((friend) => (!friendsList.includes(friend)));
-
-    return (
-      notFriends.map(
-        (user) => (
-          <li>
-            <div
-              className="friend"
-              role="button"
-              key={user}
-              value={user}
-              onClick={addFriend}
-              onKeyPress={addFriend}
-              tabIndex="-1"
-            >
-              {user}
-            </div>
-          </li>
-        ),
-      )
-    );
-  };
+  const AllUsers = () => (
+    notFriends.map(
+      (user) => (
+        <li>
+          <div
+            className="friend"
+            role="button"
+            key={user}
+            value={user}
+            onClick={addFriend}
+            onKeyPress={addFriend}
+            tabIndex="-1"
+          >
+            {user}
+          </div>
+        </li>
+      ),
+    )
+  );
 
   // need to figure out what should have tabIndex = 0
 

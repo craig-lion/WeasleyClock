@@ -24,7 +24,7 @@ const createDimensions = (sideLength, padding) => {
   return obj;
 };
 
-const dimensions = createDimensions(150, 300);
+const dimensions = createDimensions(125, 300);
 
 const circle = {
   centerX: dimensions.componentSide / 2,
@@ -39,4 +39,5 @@ const getPointOnCircle = (radian) => {
   array.push(x, y);
   return array;
 };
+
 module.exports = { getPointOnCircle, circle, dimensions };

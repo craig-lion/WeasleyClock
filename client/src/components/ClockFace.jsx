@@ -71,7 +71,11 @@ const ClockFace = (props) => {
 
 ClockFace.propTypes = {
   locations: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currentLocation: PropTypes.string.isRequired,
+  currentLocation: PropTypes.string,
+};
+
+ClockFace.defaultProps = {
+  currentLocation: null,
 };
 
 const SVG = styled.svg`
@@ -87,7 +91,8 @@ const Circle = styled.circle`
 `;
 
 const Text = styled.text`
-  font-size:30px;
+  font-size:40px;
+  font-weight:bold;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   z-index:100;
   position:absolute;
