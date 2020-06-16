@@ -1,0 +1,109 @@
+Weasley Clock App Tests
+
+  - Users 
+    -Login
+      - Can create new user
+      - User can login
+    - Friends
+      - Can vew list of all users
+      - Can vew list of friends
+      - Can add/remove friend
+
+  - Clock
+    - Displays users locations
+    - Can add/remove location
+    - Can update location
+    - Can view friend's clocks
+
+Google Docs for text editor
+
+
+
+
+  * Basic Requirements
+    - Render 'Clock'
+      x Learn what React Native is
+        x Learn how to render things in React Native
+          x Initialize Environment
+    x Try to render circle
+    x Create function to locate points on circle
+    x Render point on circle
+    x Default locations like home/work/gym/etc.
+      x Can add custom locations
+        x Add field to recieve text Input
+          x briefly research Redux
+          x create new component for topNav
+        x onSubmit updates locations with setLocation
+          x create handleSubmit fn
+          x properly render submit button and form
+          x handleSubmit updates locations
+            x pass setLocations to TopNav
+
+    x Can update location
+      x Create Input Field to update location
+        x research hooks
+        x attempt to place all vars in functional component
+          x attempt to create state hook
+          x create drop down
+          x updates location
+    x Can remove location
+      x create html button
+      x create onClick
+      x  onClick updates locations
+
+    - Can add text string status to location
+
+    - Can create user profile
+      x user profile has userName
+        x default userName is Harry
+        x title at top of page displays current wizard name
+      - User profile has picture and basic info
+    
+    -Has login/add user page
+      x create new page
+      x create state in App to conditionally render Login
+      x form to enter login information
+      x link for new User
+        x figure out what newUser did to break the Get request
+        x make add New User add correct info
+      - link  for forgotten password
+    
+    - Can add friends
+      x Add 'Manage Wizard Order' button
+      - Button toggles conditional formatting for friends management
+        x create Div to replace with friend management
+        x reate handleClick function for manage wizard order
+        - create friends management component
+          x create Manage locations button to return
+          x create handleClick function for manage locations
+          x create container for allWiz and yourOrder lists
+            x allWiz container renders dummy names
+            x yourOrder renders dummy names array
+            x update schema to have 'friends' property
+            - allWiz renders list of all users
+              x create state for allUsers
+              - create useEffect to update allUsers when component loads
+            - yourOrder renders list of users friends
+              x create state for myFriends
+              - useEffect to update myFriends when component loads
+            - can click on name to add/remove friend
+
+    - Can view friend's clock
+    - Can create friend groups
+      - Can filter which hands show by friend group
+    
+    - user information persists over logins
+      x choose DB
+      x install dependencies
+      x create DB schema
+      x create DB
+      - create server routes
+        x create POST request
+        x create GET request
+      x create path from server to db
+      x create paths from front-end to DB
+      x front-end recieves data from DB
+      x front-end initial render is based on GET request from DB
+      - front-end updates DB
+        - create post req for updating locations
+        - create post route to db

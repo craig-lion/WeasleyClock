@@ -142,12 +142,15 @@ Weasley Clock App
   
   * Create Test Suite
     x Reset Jest/Enzyme knowledge
-    - Setup environment
+    x Setup environment
     - Decide what should be tested
-    - Successfully write 1 test
-    - Successfully run 1 test
+      - 
+    x Successfully write 1 test
+    x Successfully run 1 test
     - Finish writing tests
     - Confirm all tests are working successfully
+  
+
 
 
   * Intermediate Requirements
