@@ -46,15 +46,15 @@ const allUserNames = async (callback) => {
   });
 };
 
-const login = (userName, password) => {
-  const query = db.User.where({ userName, password });
+const login = (userName) => {
+  const query = db.User.where({ userName });
   return new Promise((resolve, reject) => {
     query.findOne((err, data) => {
       if (err) {
         reject(err);
       } else if (data === null) {
         resolve(false);
-      } else { resolve(data.userName); }
+      } else { resolve(data.password); }
     });
   });
 };

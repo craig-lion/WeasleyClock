@@ -15,11 +15,11 @@ const Login = (props) => {
     const query = { userName, password };
     axios.post('/api/login', query)
       .then((result) => {
-        if (result.data === false) {
-          alert('Login Failed');
-        } else {
+        if (result.data) {
           setLoginUserName(userName);
           setIsLoggedIn(true);
+        } else {
+          alert('Login Failed');
         }
       });
     setUserName('');

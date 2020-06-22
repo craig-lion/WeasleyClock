@@ -87,13 +87,13 @@ const FriendsList = (props) => {
       </Div>
       <Container>
         <Left>
-          <p>All Wizard Names Go Here</p>
+          <p>All Wizards</p>
           <List>
             <AllUsers />
           </List>
         </Left>
         <Right>
-          Wizards in Your Order Go Here
+          <p>Your Order</p>
           <List>
             <Friends />
           </List>
@@ -119,24 +119,21 @@ const Container = styled.div`
   display:flex;
   flex-direction:row;
   width:350px;
-  height:250px;
-  border: 2px solid;
+  height:150px;
 `;
 
 const Left = styled.div`
-  border:2px solid red;
   height:auto;
-  width:auto;
+  width:50%;
 `;
 
 const Right = styled.div`
-  border:2px solid green;
   height:auto;
-  width:auto;
+  width:50%;
 `;
 
 const List = styled.ul`
-list-style-type: none;
+  list-style-type: none;
 `;
 
 const Label = styled.label`
