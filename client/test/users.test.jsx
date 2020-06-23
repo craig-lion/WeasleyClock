@@ -1,19 +1,22 @@
 import 'regenerator-runtime/runtime';
 import {
-  describe, expect, it, test, beforeEach, afterEach, jest,
+  describe, expect, it, beforeEach, afterEach, jest,
 } from '@jest/globals';
-import Enzyme from 'enzyme';
-import React, { useState } from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import React from 'react';
 import axios from 'axios';
-import Adapter from 'enzyme-adapter-react-16';
 import Login from '../src/components/Login';
 
-Enzyme.configure({ adapter: new Adapter() });
+const domTestingLib = require('@testing-library/dom');
+
+const { queryHelpers } = domTestingLib;
+
 jest.mock('axios');
 
 describe('users', () => {
+  let wrapper;
+
   describe('authentication', () => {
-    let wrapper;
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
     useStateSpy.mockImplementation((init) => [init, setState]);
@@ -21,34 +24,63 @@ describe('users', () => {
     axios.post.mockImplementation(() => postPromise);
     const setLoginUserName = jest.fn();
     const setIsLoggedIn = jest.fn();
+    // const { asFragment } = render(<Login
+    //   setLoginUserName={setLoginUserName}
+    //   setIsLoggedIn={setIsLoggedIn}
+    // />);
 
+    // it('FragmentTest', () => {
+
+    //   expect(asFragment()).toMatchSnapshot();
+    // });
 
     beforeEach(() => {
-      wrapper = Enzyme.mount((<Login setLoginUserName={setLoginUserName} setIsLoggedIn={setIsLoggedIn} />));
+      // wrapper = Enzyme.mount((<Login
+      //   setLoginUserName={setLoginUserName}
+      //   setIsLoggedIn={setIsLoggedIn}
+      // />));
+      wrapper = render(<Login
+        setLoginUserName={setLoginUserName}
+        setIsLoggedIn={setIsLoggedIn}
+      />);
     });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
+
     it('can create new user', async () => {
-      const userName = wrapper.find('#userName').at(0);
-      const password = wrapper.find('#password').at(0);
-      userName.value = 'TestUser';
-      userName.simulate('change', { target: userName });
-      expect(setState).toHaveBeenCalledWith('TestUser');
-      password.value = 'TestPass';
-      password.simulate('change', { target: password });
-      expect(setState).toHaveBeenCalledWith('TestPass');
-      const knownUser = wrapper.find('#knownUser').at(0);
-      const newUser = wrapper.find('#newUnser').at(0);
-      knownUser.simulate('click');
-      expect(axios.post).toHaveBeenCalledWith('/api/login', { userName: expect.any(String), password: expect.any(String) });
+      const getById = queryHelpers.queryByAttribute.bind(null, 'id');
+      fireEvent.click(getById(wrapper.container, 'newUser'));
+      expect(axios.post).toHaveBeenCalledWith('/api/addUser', { userName: expect.any(String), password: expect.any(String) });
       await postPromise;
       expect(setLoginUserName).toHaveBeenCalledWith(expect.any(String));
       expect(setIsLoggedIn).toHaveBeenCalledWith(true);
     });
+
+    // it('existing user can login', async () => {
+    //   const knownUser = wrapper.find('#knownUser').at(0);
+    //   knownUser.simulate('click');
+    //   expect(axios.post).toHaveBeenCalledWith('/api/login', { userName: expect.any(String), password: expect.any(String) });
+    //   await postPromise;
+    //   expect(setLoginUserName).toHaveBeenCalledWith(expect.any(String));
+    //   expect(setIsLoggedIn).toHaveBeenCalledWith(true);
+
+    //   const userName = wrapper.find('#userName').at(0);
+    //   const password = wrapper.find('#password').at(0);
+
+    //   userName.value = 'TestUser';
+    //   userName.simulate('change', { target: userName });
+    //   expect(setState).toHaveBeenCalledWith('TestUser');
+
+    //   password.value = 'TestPass';
+    //   password.simulate('change', { target: password });
+    //   expect(setState).toHaveBeenCalledWith('TestPass');
+    // });
   });
-  describe('friends', () => {});
+  // describe('friends', () => {
+
+  // });
 });
 
 // describe("Title input", () => {

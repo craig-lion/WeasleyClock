@@ -32,6 +32,7 @@ const Login = (props) => {
     axios.post('/api/addUser', query)
       .then(() => {
         setIsLoggedIn(true);
+        setLoginUserName(userName);
       });
     setUserName('');
     setPassword('');

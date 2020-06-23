@@ -43,6 +43,8 @@
     "@babel/preset-react": "^7.9.4",
     "@jest/globals": "^26.0.1",
     "@popperjs/core": "^2.3.3",
+    "@testing-library/dom": "^7.17.0",
+    "@testing-library/react": "^10.3.0",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",

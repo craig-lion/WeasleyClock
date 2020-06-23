@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxiKw iyuiXf"
+  >
+    <p
+      class="sc-AxjAm krrDgX"
+    >
+       New Wiz WhoDis?
+    </p>
+    <form>
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <label
+          class="sc-AxhUy debCfc"
+        >
+          What is your Wizard Name?
+        </label>
+      </div>
+      <input
+        class="sc-AxhCb eYTsEC"
+        color="red"
+        id="userName"
+        name="userName"
+        type="text"
+        value=""
+      />
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <label
+          class="sc-AxhUy debCfc"
+        >
+          What is your Secret Spell?
+        </label>
+      </div>
+      <input
+        class="sc-AxhCb eYTsEC"
+        color="antiquewhite"
+        id="password"
+        name="password"
+        type="text"
+        value=""
+      />
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <input
+          class="sc-AxgMl eqWaMp"
+          id="knownUser"
+          type="submit"
+          value="Known Wizard"
+        />
+      </div>
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <input
+          class="sc-AxgMl eqWaMp"
+          id="newUser"
+          type="submit"
+          value="New Wizard"
+        />
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`users authentication FragmentTest 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxiKw iyuiXf"
+  >
+    <p
+      class="sc-AxjAm krrDgX"
+    >
+       New Wiz WhoDis?
+    </p>
+    <form>
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <label
+          class="sc-AxhUy debCfc"
+        >
+          What is your Wizard Name?
+        </label>
+      </div>
+      <input
+        class="sc-AxhCb eYTsEC"
+        color="red"
+        id="userName"
+        name="userName"
+        type="text"
+        value=""
+      />
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <label
+          class="sc-AxhUy debCfc"
+        >
+          What is your Secret Spell?
+        </label>
+      </div>
+      <input
+        class="sc-AxhCb eYTsEC"
+        color="antiquewhite"
+        id="password"
+        name="password"
+        type="text"
+        value=""
+      />
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <input
+          class="sc-AxgMl eqWaMp"
+          id="knownUser"
+          type="submit"
+          value="Known Wizard"
+        />
+      </div>
+      <div
+        class="sc-AxirZ cfvkjE"
+      >
+        <input
+          class="sc-AxgMl eqWaMp"
+          id="newUser"
+          type="submit"
+          value="New Wizard"
+        />
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;

@@ -2,8 +2,8 @@ Weasley Clock App Tests
 
   - Users 
     -Login
-      - Can create new user
-      - User can login
+      x Can create new user
+      x User can login
     - Friends
       - Can vew list of all users
       - Can vew list of friends

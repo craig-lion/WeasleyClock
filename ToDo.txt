@@ -114,7 +114,7 @@ Weasley Clock App
     x Move Styles into separate file
       x import 1 style from styles.js
     x Fix server routes
-    - Fix user authentication
+    x Fix user authentication
 
     Bottom - MainPage
     * Button - App, TopNav, Button, Login
@@ -143,11 +143,13 @@ Weasley Clock App
   * Create Test Suite
     x Reset Jest/Enzyme knowledge
     x Setup environment
-    - Decide what should be tested
-      - 
+    x Decide what should be tested 
     x Successfully write 1 test
     x Successfully run 1 test
     - Finish writing tests
+      - convert enzyme tests to react-test-lib
+      - write friends tests
+      - write clock tests
     - Confirm all tests are working successfully
   
 
