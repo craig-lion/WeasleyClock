@@ -17,18 +17,20 @@ const getById = queryHelpers.queryByAttribute.bind(null, 'id');
 const mockSetState = jest.fn();
 jest.mock('axios');
 
-describe('users', () => {
+beforeEach(() => {
+  jest.mock('react', () => ({
+    useState: (initial) => [initial, mockSetState],
+  }));
+});
+
+describe('Users', () => {
   let wrapper;
-  describe('authentication', () => {
+  describe('Login', () => {
     let setLoginUserName;
     let setIsLoggedIn;
     let postPromise;
 
     beforeEach(() => {
-      jest.mock('react', () => ({
-        useState: (initial) => [initial, mockSetState],
-      }));
-
       postPromise = Promise.resolve({ data: true });
       axios.post.mockImplementation(() => postPromise);
       setLoginUserName = jest.fn();
@@ -44,7 +46,7 @@ describe('users', () => {
       jest.clearAllMocks();
     });
 
-    describe('test newUser onClick functionality', () => {
+    describe('can create new user', () => {
       // render form (in beforeEach)
       it('new user form data is correctly captured and sent to POST onClick', () => {
         // simulate change for userName
@@ -70,5 +72,36 @@ describe('users', () => {
         expect(setIsLoggedIn, 'setIsLoggedIn should be true but it is not').toHaveBeenCalledWith(true);
       });
     });
+
+    describe('existing user can login', () => {
+      // render form (in beforeEach)
+      it('known user form data is correctly captured and sent to POST onClick', () => {
+        // simulate change for userName
+        fireEvent.change(getById(wrapper.container, 'userName'), { target: { value: 'Lion' } });
+        // simulate change for pass
+        fireEvent.change(getById(wrapper.container, 'password'), { target: { value: 'Lion' } });
+        // wait for userName and pass to update
+        // simulate click
+        fireEvent.click(getById(wrapper.container, 'knownUser'));
+        // check if click triggers post request with proper data
+        expect(axios.post).toHaveBeenCalledWith('/api/login', { userName: 'Lion', password: 'Lion' });
+      });
+      it('Updates LoginUserName and IsLoggedIn correctly upon sucessful login', async () => {
+        // simulate change for userName
+        fireEvent.change(getById(wrapper.container, 'userName'), { target: { value: 'Lion' } });
+        // simulate click
+        fireEvent.click(getById(wrapper.container, 'knownUser'));
+        // simulate successful login
+        await postPromise;
+        // setLoginUserName shout update userName with recieved string
+        expect(setLoginUserName, 'setLoginUserName should have gotten a string but it did not').toHaveBeenCalledWith('Lion');
+        // setIsLoggedIn should update to true
+        expect(setIsLoggedIn, 'setIsLoggedIn should be true but it is not').toHaveBeenCalledWith(true);
+      });
+    });
+  });
+
+  describe('Friends', () => {
+
   });
 });
