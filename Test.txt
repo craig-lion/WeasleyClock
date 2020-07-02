@@ -3,10 +3,12 @@ Weasley Clock App Tests
   - Users 
     -Login
       x Can create new user
+        x new user form data captures correctly and sent to POST
+        x state correctly updates upon successful login
       x User can login
+        x known user form data captures correctly and sent to POST
+        x state correctly updates upon successful login
     - Friends
-      - Can vew list of all users
-      - Can vew list of friends
       - Can add/remove friend
 
   - Clock
@@ -14,6 +16,19 @@ Weasley Clock App Tests
     - Can add/remove location
     - Can update location
     - Can view friend's clocks
+
+
+Testing Notes:
+
+* Started with Enzyme, discovered it doesn't support hooks well, switched to react-testing-lib
+* 3 As of testing
+* Custom messages with Jest
+* DRY vs Granularity (I repeated for more clarity)
+* Granularity vs speed (my project is small so I decided to make them very clear even tho that wouldn't work with a larger project)
+* Watch out for the order that you import, react mock outside of beforeEach threw error
+* I didn't do TDD but I should have.  Writing tests forced me be confident in the logic of my code in order to figure out what needed to be tested
+* Realized I needed an id to test my add/remove friends; initially tried to solve with friend-ele-count, switched to friend-ele-username because more clear and consistent
+* (What should you test) When the component is mock-rendered it can do everything the normal component can do but not all of those functions are exposed unless you set them up to be spied upon so I can make the component do something and see what happens after easier than I can check to see what exactly is happening?
 
 Google Docs for text editor
 

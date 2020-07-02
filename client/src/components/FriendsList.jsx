@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-
 const FriendsList = (props) => {
   const { handleLocations, friends } = props;
 
@@ -25,21 +24,25 @@ const FriendsList = (props) => {
 
   const AllUsers = () => (
     notFriends.map(
-      (user) => (
-        <li>
-          <div
-            className="friend"
-            role="button"
-            key={user}
-            value={user}
-            onClick={addFriend}
-            onKeyPress={addFriend}
-            tabIndex="-1"
-          >
-            {user}
-          </div>
-        </li>
-      ),
+      (user) => {
+        const id = `Friend-ele-${user}`;
+        return (
+          <li>
+            <div
+              id={id}
+              className="friend"
+              role="button"
+              key={user}
+              value={user}
+              onClick={addFriend}
+              onKeyPress={addFriend}
+              tabIndex="-1"
+            >
+              {user}
+            </div>
+          </li>
+        );
+      },
     )
   );
 
@@ -47,21 +50,25 @@ const FriendsList = (props) => {
 
   const Friends = () => (
     friendsList.map(
-      (user) => (
-        <li>
-          <div
-            className="friend"
-            key={user}
-            value={user}
-            onClick={removeFriend}
-            role="button"
-            tabIndex="-1"
-            onKeyPress={addFriend}
-          >
-            {user}
-          </div>
-        </li>
-      ),
+      (user) => {
+        const id = `Friend-ele-${user}`;
+        return (
+          <li>
+            <div
+              id={id}
+              className="friend"
+              key={user}
+              value={user}
+              onClick={removeFriend}
+              role="button"
+              tabIndex="-1"
+              onKeyPress={addFriend}
+            >
+              {user}
+            </div>
+          </li>
+        );
+      },
     )
   );
 
@@ -74,7 +81,9 @@ const FriendsList = (props) => {
           );
           return array;
         };
+        console.log('this is res.data', res.data);
         const allUsers = makeArray(res.data);
+        console.log('this is allUSers in useEffect', allUsers);
         setAllUsersList(allUsers);
       })
       .catch((err) => { throw err; });
@@ -100,7 +109,7 @@ const FriendsList = (props) => {
         </Right>
       </Container>
       <Div>
-        <Button type="submit" value="Manage Locations!" onClick={handleLocations} />
+        <Button id="changeFriends" type="submit" value="Manage Locations!" onClick={handleLocations} />
       </Div>
     </>
   );

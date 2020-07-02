@@ -1,13 +1,16 @@
+// eslint-disable-next-line no-unused-vars
 import regeneratorRuntime from 'regenerator-runtime';
 import React from 'react';
 import {
   describe, expect, it, beforeEach, afterEach, jest,
 } from '@jest/globals';
 import {
-  render, fireEvent, waitFor, screen,
+  render, fireEvent, waitFor,
 } from '@testing-library/react';
 import axios from 'axios';
+import { act } from 'react-dom/test-utils';
 import Login from '../src/components/Login';
+import FriendsList from '../src/components/FriendsList';
 
 const domTestingLib = require('@testing-library/dom');
 
@@ -102,6 +105,54 @@ describe('Users', () => {
   });
 
   describe('Friends', () => {
+    // initialize state variables
+    const friends = [];
+    let handleLocations;
+    let userName;
+    let postPromise;
+    let getPromise;
+    let friendsList;
 
+    // render component
+    beforeEach(() => {
+      handleLocations = jest.fn();
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe('Can Add/Remove Friend', () => {
+      it('Clicking on Not Friend User Adds Them to Friend List', async () => {
+        getPromise = Promise.resolve({ data: [{ userName: 'Lion' }, { userName: 'Lamb' }] });
+        axios.get.mockImplementation(() => getPromise);
+        act(() => {
+          wrapper = render(<FriendsList
+            friends={friends}
+            handleLocations={handleLocations}
+            userName={userName}
+          />);
+        });
+        await act(async () => {
+          postPromise = Promise.resolve({ data: ['Lion'] });
+          axios.post.mockImplementation(() => postPromise);
+          // simulate click
+          await waitFor(() => (expect(getById(wrapper.container, 'Friend-ele-Lion')).toBeTruthy()));
+          fireEvent.click(getById(wrapper.container, 'Friend-ele-Lion'));
+          // expect POST to be called with array containing newFriend
+          const data = { friends: ['Lion'] };
+          expect(axios.post).toHaveBeenCalledWith('/api/updateFriends', data);
+          // await promise
+          await postPromise;
+          // wait for setFriendsList to be called
+          // await waitFor(() => (expect(setFriendsList).toHaveBeenCalled()));
+          // expect friendsList to include newFriend
+          // expect(friendsList).toContain('Lion');
+        });
+      });
+      // for remove friend
+      // expect POST to be called with array not containing lessFriend
+      // expect setFriendsList to not include lessFriend
+    });
   });
 });
