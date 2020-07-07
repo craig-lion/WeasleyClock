@@ -1,21 +1,21 @@
 Weasley Clock App Tests
 
   - Users 
-    -Login
+    x Login
       x Can create new user
         x new user form data captures correctly and sent to POST
         x state correctly updates upon successful login
       x User can login
         x known user form data captures correctly and sent to POST
         x state correctly updates upon successful login
-    - Friends
+    x Friends
       - Can add/remove friend
+      - Can view friend's clock
 
   - Clock
     - Displays users locations
     - Can add/remove location
     - Can update location
-    - Can view friend's clocks
 
 
 Testing Notes:

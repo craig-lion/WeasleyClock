@@ -5,12 +5,12 @@ import {
   describe, expect, it, beforeEach, afterEach, jest,
 } from '@jest/globals';
 import {
-  render, fireEvent, waitFor,
+  render, fireEvent, waitFor, act,
 } from '@testing-library/react';
 import axios from 'axios';
-import { act } from 'react-dom/test-utils';
 import Login from '../src/components/Login';
 import FriendsList from '../src/components/FriendsList';
+import CenterpieceDropDown from '../src/components/CenterpieceDropDown';
 
 const domTestingLib = require('@testing-library/dom');
 
@@ -106,26 +106,24 @@ describe('Users', () => {
 
   describe('Friends', () => {
     // initialize state variables
-    const friends = [];
-    let handleLocations;
-    let userName;
+    const friends = ['Lion'];
+    const setLocations = jest.fn();
+    const setCurrentLocation = jest.fn();
+    const setSuppress = jest.fn();
+    const handleLocations = jest.fn();
+    const userName = 'Lion';
     let postPromise;
     let getPromise;
-    let friendsList;
-
-    // render component
-    beforeEach(() => {
-      handleLocations = jest.fn();
-    });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
     describe('Can Add/Remove Friend', () => {
-      it('Clicking on Not Friend User Adds Them to Friend List', async () => {
+      it('Clicking on Not Friend User Adds User to Friend List, Clicking again Removes', async () => {
         getPromise = Promise.resolve({ data: [{ userName: 'Lion' }, { userName: 'Lamb' }] });
         axios.get.mockImplementation(() => getPromise);
+        // render component
         act(() => {
           wrapper = render(<FriendsList
             friends={friends}
@@ -140,19 +138,48 @@ describe('Users', () => {
           await waitFor(() => (expect(getById(wrapper.container, 'Friend-ele-Lion')).toBeTruthy()));
           fireEvent.click(getById(wrapper.container, 'Friend-ele-Lion'));
           // expect POST to be called with array containing newFriend
-          const data = { friends: ['Lion'] };
+          let data = { friends: ['Lion'] };
           expect(axios.post).toHaveBeenCalledWith('/api/updateFriends', data);
-          // await promise
-          await postPromise;
-          // wait for setFriendsList to be called
-          // await waitFor(() => (expect(setFriendsList).toHaveBeenCalled()));
-          // expect friendsList to include newFriend
-          // expect(friendsList).toContain('Lion');
+          // expect element to be added to yourOrder
+          await waitFor(() => (expect(getById(getById(wrapper.container, 'yourOrder'), 'Friend-ele-Lion')).toBeTruthy()));
+          // simulate click
+          fireEvent.click(getById(wrapper.container, 'Friend-ele-Lion'));
+          // expect POST to be called with array NOT containing newFriend
+          data = { friends: expect.not.arrayContaining(['Lion']) };
+          expect(axios.post).toHaveBeenCalledWith('/api/updateFriends', data);
+          // expect elemetn to be added to AllWiz
+          await waitFor(() => (expect(getById(getById(wrapper.container, 'allWiz'), 'Friend-ele-Lion')).toBeTruthy()));
         });
       });
-      // for remove friend
-      // expect POST to be called with array not containing lessFriend
-      // expect setFriendsList to not include lessFriend
+    });
+
+    describe('Can view Friend Clock', () => {
+      beforeEach(() => {
+      // render component
+        act(() => {
+          wrapper = render(<CenterpieceDropDown
+            friends={friends}
+            userName={userName}
+            setLocations={setLocations}
+            setCurrentLocation={setCurrentLocation}
+            setSuppress={setSuppress}
+          />);
+        });
+      });
+      it('Dropdown Correctly Renders', () => {
+        // check if component renders
+        expect(wrapper).not.toBeNull();
+        // check if friend clock element exists
+        expect(getById(wrapper.container, 'Lion')).toBeTruthy();
+      });
+      it('', () => {
+        // simulate change
+        fireEvent.change(getById(wrapper.container, 'clocks'), { target: { value: 'Lion' } });
+        // expect axios /api/userInfo to be called with Lion
+        // expect locations to change
+        // expect currentLocation to change
+        // expect setSuppress to be called with true
+      });
     });
   });
 });

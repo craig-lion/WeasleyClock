@@ -81,9 +81,7 @@ const FriendsList = (props) => {
           );
           return array;
         };
-        console.log('this is res.data', res.data);
         const allUsers = makeArray(res.data);
-        console.log('this is allUSers in useEffect', allUsers);
         setAllUsersList(allUsers);
       })
       .catch((err) => { throw err; });
@@ -97,13 +95,13 @@ const FriendsList = (props) => {
       <Container>
         <Left>
           <p>All Wizards</p>
-          <List>
+          <List id="allWiz">
             <AllUsers />
           </List>
         </Left>
         <Right>
           <p>Your Order</p>
-          <List>
+          <List id="yourOrder">
             <Friends />
           </List>
         </Right>

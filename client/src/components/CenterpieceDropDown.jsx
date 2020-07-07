@@ -3,14 +3,13 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-
 const CenterpieceDropDown = (props) => {
   const {
     friends, setLocations, setCurrentLocation, setSuppress, userName,
   } = props;
 
   const clocks = friends.map((friend) => (
-    <Option key={friend} width="20px" value={friend}>{friend}</Option>
+    <Option id={friend} key={friend} width="20px" value={friend}>{friend}</Option>
   ));
 
   const changeClock = (e) => {
