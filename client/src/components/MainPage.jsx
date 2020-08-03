@@ -20,7 +20,6 @@ const MainPage = (props) => {
     axios.get('/api/userInfo')
       .then((res) => {
         const oneUser = res.data;
-        console.log('this is oneUser: ', oneUser);
         setLocations(oneUser.locations);
         setUserName(oneUser.userName);
         setCurrentLocation(oneUser.currentLocation);

@@ -21,7 +21,6 @@ app.use('/', express.static(path.join(__dirname, '../client', 'public')));
 
 const checkForLogin = (endpointFunc) => (
   (req, res) => {
-    console.log('this is cookies in checkForLogin: ', req.cookies.session);
     if (req.cookies.session) {
       endpointFunc(req, res);
     } else { res.send(403); }
@@ -91,8 +90,6 @@ app.post('/api/updateLocations', checkForLogin((req) => {
 }));
 
 app.post('/api/logout', checkForLogin((req, res) => {
-  console.log('this is req.cookies.session', req.cookies.session);
-  console.log('delete');
   res.clearCookie('session', options);
   res.send(false);
 }));

@@ -22,9 +22,7 @@ const TopNav = (props) => {
   const [manageFriends, setManageFriends] = useState(false);
 
   const handleSubmit = (e) => {
-    console.log('TEST');
     let post = {};
-    console.log('this is post: ', post);
     e.preventDefault();
     const updateDB = async () => {
       const newLocations = [...props.locations, text];
@@ -32,10 +30,8 @@ const TopNav = (props) => {
       setCurrentLocation(text);
       return newLocations;
     };
-    console.log('this is updateDB()', updateDB());
     updateDB()
       .then((newLocations) => {
-        console.log('this is newLocations', newLocations);
         post = { locations: newLocations, userName, currentLocation };
         axios.post('/api/updateLocations', post);
       });
