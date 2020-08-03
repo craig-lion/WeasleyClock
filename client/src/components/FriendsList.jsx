@@ -11,6 +11,7 @@ const FriendsList = (props) => {
 
   const addFriend = (e) => {
     const newFriends = [...friendsList, e.target.getAttribute('value')];
+
     axios.post('/api/updateFriends', { friends: newFriends });
     setFriendsList(newFriends);
   };
@@ -27,7 +28,7 @@ const FriendsList = (props) => {
       (user) => {
         const id = `Friend-ele-${user}`;
         return (
-          <li>
+          <li key={user}>
             <div
               id={id}
               className="friend"
@@ -53,7 +54,7 @@ const FriendsList = (props) => {
       (user) => {
         const id = `Friend-ele-${user}`;
         return (
-          <li>
+          <li key={user}>
             <div
               id={id}
               className="friend"

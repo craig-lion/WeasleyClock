@@ -14,8 +14,8 @@ const Locations = (props) => {
       </Div>
       <Text type="text" color="white" id="location" value={text} onChange={(e) => setText(e.target.value)} name="location" />
       <Div>
-        <Button type="submit" value="Portus!" />
-        <Button type="submit" value="Evanesco!" onClick={handleRemove} />
+        <Button id="addLocation" type="submit" value="Portus!" onClick={handleSubmit} />
+        <Button id="removeLocation" type="submit" value="Evanesco!" onClick={handleRemove} />
       </Div>
     </form>
   );

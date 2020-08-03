@@ -5,12 +5,16 @@ import {
   describe, expect, it, beforeEach, afterEach, jest,
 } from '@jest/globals';
 import {
-  render, fireEvent, waitFor, act,
+  render, fireEvent, waitFor, act, getByText,
 } from '@testing-library/react';
 import axios from 'axios';
 import Login from '../src/components/Login';
 import FriendsList from '../src/components/FriendsList';
 import CenterpieceDropDown from '../src/components/CenterpieceDropDown';
+import ClockFace from '../src/components/ClockFace';
+import Locations from '../src/components/Locations';
+import TopNavDropDown from '../src/components/TopNavDropDown';
+import TopNav from '../src/components/TopNav';
 
 const domTestingLib = require('@testing-library/dom');
 
@@ -24,6 +28,10 @@ beforeEach(() => {
   jest.mock('react', () => ({
     useState: (initial) => [initial, mockSetState],
   }));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 describe('Users', () => {
@@ -106,7 +114,6 @@ describe('Users', () => {
 
   describe('Friends', () => {
     // initialize state variables
-    const friends = ['Lion'];
     const setLocations = jest.fn();
     const setCurrentLocation = jest.fn();
     const setSuppress = jest.fn();
@@ -115,10 +122,6 @@ describe('Users', () => {
     let postPromise;
     let getPromise;
 
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
     describe('Can Add/Remove Friend', () => {
       it('Clicking on Not Friend User Adds User to Friend List, Clicking again Removes', async () => {
         getPromise = Promise.resolve({ data: [{ userName: 'Lion' }, { userName: 'Lamb' }] });
@@ -126,7 +129,7 @@ describe('Users', () => {
         // render component
         act(() => {
           wrapper = render(<FriendsList
-            friends={friends}
+            friends={[]}
             handleLocations={handleLocations}
             userName={userName}
           />);
@@ -158,7 +161,7 @@ describe('Users', () => {
       // render component
         act(() => {
           wrapper = render(<CenterpieceDropDown
-            friends={friends}
+            friends={['Lion']}
             userName={userName}
             setLocations={setLocations}
             setCurrentLocation={setCurrentLocation}
@@ -172,14 +175,149 @@ describe('Users', () => {
         // check if friend clock element exists
         expect(getById(wrapper.container, 'Lion')).toBeTruthy();
       });
-      it('', () => {
+      it('Change in Dropdown Correctly Renders Friend Clock', async () => {
+        // prep axios data
+        const locations = ['Black Rock City', 'The Playa'];
+        const currentLocation = 'The Playa';
+        // mock axios response
+        getPromise = Promise.resolve({ data: { locations, currentLocation } });
+        axios.get.mockImplementation(() => getPromise);
         // simulate change
         fireEvent.change(getById(wrapper.container, 'clocks'), { target: { value: 'Lion' } });
         // expect axios /api/userInfo to be called with Lion
-        // expect locations to change
-        // expect currentLocation to change
-        // expect setSuppress to be called with true
+        const data = { params: { userName: 'Lion' } };
+        expect(axios.get).toHaveBeenCalledWith('/api/userInfo', data);
+        await waitFor(() => {
+          // expect locations to change
+          expect(setLocations).toHaveBeenCalledWith(locations);
+          // expect currentLocation to change
+          expect(setCurrentLocation).toHaveBeenCalledWith(currentLocation);
+          // expect setSuppress to be called with true
+          expect(setSuppress).toHaveBeenCalledWith(true);
+        });
       });
+    });
+  });
+});
+
+describe('Clock', () => {
+  // initialize wrapper for new render
+  let wrapper;
+  let locationsWrapper;
+  let topNavWrapper;
+  describe('ClockFace', () => {
+    // initialize render
+    beforeEach(() => {
+      wrapper = render(
+        <ClockFace
+          locations={['Black Rock City', 'The Playa']}
+          currentLocation="The Playa"
+        />,
+      );
+    });
+
+    it('ClockFace Properly Renders Locations', () => {
+      // check to see if there is a text element with given location
+      expect(getByText(wrapper.container, 'Black Rock City')).toBeTruthy();
+    });
+  });
+  describe('Locations', () => {
+    // initialize state variables
+    const handleSubmit = jest.fn((e) => e.preventDefault);
+    const setText = jest.fn();
+    const handleRemove = jest.fn();
+    const handleFriends = jest.fn();
+    const setSuppress = jest.fn();
+    const setCurrentLocation = jest.fn();
+    const setLocations = jest.fn();
+    const logout = jest.fn();
+    const text = '';
+    const userName = 'Lion';
+    const locations = ['Black Rock City', 'The Playa'];
+    const currentLocation = 'The Playa';
+    const friends = ['Lion', 'Lamb'];
+    const suppress = false;
+
+    // initialize render
+    beforeEach(() => {
+      locationsWrapper = render(
+        <Locations
+          handleSubmit={handleSubmit}
+          text={text}
+          setText={setText}
+          handleRemove={handleRemove}
+          handleFriends={handleFriends}
+        />,
+      );
+      topNavWrapper = render(
+        <TopNav
+          userName={userName}
+          setCurrentLocation={setCurrentLocation}
+          setLocations={setLocations}
+          locations={locations}
+          currentLocation={currentLocation}
+          friends={friends}
+          logout={logout}
+          suppress={suppress}
+          setSuppress={setSuppress}
+        />,
+      );
+    });
+
+    it('Can add/remove location', async () => {
+      // simulate change
+      fireEvent.change(getById(locationsWrapper.container, 'location'), { target: { value: 'The Temple' } });
+      // await expect setText to update
+      await waitFor(() => {
+        expect(setText).toHaveBeenCalledWith('The Temple');
+      });
+      // simulate handleSubmit
+      fireEvent.click(getById(locationsWrapper.container, 'addLocation'));
+      // see if handleSubmit happens properly
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalled();
+      });
+      // await waitFor(() => {
+      //   expect(setLocations).toHaveBeenCalledWith(expect.arrayContaining(['The Temple']));
+      // });
+      // simulate handleRemove
+      fireEvent.change(getById(locationsWrapper.container, 'removeLocation'));
+      // see if handleRemove happens properly
+      await waitFor(() => {
+
+      });
+    });
+  });
+
+  describe('TopNavDropDown', () => {
+    // initialize state variables
+    const setCurrentLocation = jest.fn();
+    const userName = 'Lion';
+    const allLocations = ['Black Rock City', 'The Playa'];
+    let currentLocation;
+
+    // initialize render
+    beforeEach(() => {
+      wrapper = render(
+        <TopNavDropDown
+          userName={userName}
+          setCurrentLocation={setCurrentLocation}
+          currentLocation={currentLocation}
+          allLocations={allLocations}
+        />,
+      );
+    });
+
+    it('Can update location', async () => {
+      // simulate change
+      fireEvent.change(getById(wrapper.container, 'locations'), { target: { value: 'Black Rock City' } });
+      // await setCurrentLocation to update
+      await waitFor(() => {
+        expect(setCurrentLocation).toHaveBeenCalledWith('Black Rock City');
+      });
+      // expect axios
+      const post = { userName, currentLocation: 'Black Rock City' };
+      expect(axios.post).toHaveBeenCalledWith('/api/updateLocations', post);
     });
   });
 });

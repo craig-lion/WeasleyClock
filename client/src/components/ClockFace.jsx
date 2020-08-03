@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-
 const helper = require('./helper.js');
-
 
 const ClockFace = (props) => {
   const { locations, currentLocation } = props;

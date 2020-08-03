@@ -3,22 +3,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-
 const TopNavDropDown = (props) => {
   const {
     setCurrentLocation, userName, currentLocation, allLocations,
   } = props;
 
-  const locations = allLocations.map((location) => {
-    if (location === currentLocation) {
-      return (
-        <option key={location} value={location} selected>{location}</option>
-      );
-    }
-    return (
-      <option key={location} value={location}>{location}</option>
-    );
-  });
+  const locations = allLocations.map((location) => (
+    <option key={location} value={location}>{location}</option>
+  ));
 
   const moveArm = (e) => {
     let post = {};
@@ -30,7 +22,7 @@ const TopNavDropDown = (props) => {
   return (
     <TopNavDropDownStyle>
       <Label>Where are you?</Label>
-      <Select id="locations" onChange={moveArm}>
+      <Select id="locations" onChange={moveArm} defaultValue={currentLocation}>
         {locations}
       </Select>
     </TopNavDropDownStyle>
