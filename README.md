@@ -28,17 +28,19 @@ A more detailed plan for the app can be found in "AppPlan.txt"
 --
 #### Installation
 --
+External Dependencies: [MongoDB](https://docs.mongodb.com/manual/installation/)
+
 Install Dependencies:
 
 `npm install`
 
 Build Webpack:
 
-`npm run`
+`npm run build`
 
 Start Server:
 
-`npm start`
+`npm run start`
 
 
 --

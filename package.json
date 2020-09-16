@@ -7,7 +7,7 @@
     "test": "jest",
     "start-dev": "nodemon server",
     "react-dev": "webpack -w",
-    "run": "webpack",
+    "build": "webpack",
     "start": "nodemon server"
   },
   "repository": {

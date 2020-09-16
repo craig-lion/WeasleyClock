@@ -35,6 +35,7 @@ const Div = styled.div`
 const Text = styled.input`
   background-image: url('darkWood.jpg');
   border-radius:18px;
+  color:antiqueWhite;
   border-color:antiqueWhite;
 `;
 

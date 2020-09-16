@@ -45,11 +45,11 @@ const Login = (props) => {
         <Div>
           <Label>What is your Wizard Name?</Label>
         </Div>
-        <Text type="text" color="red" id="userName" value={userName} onChange={(e) => setUserName(e.target.value)} name="userName" />
+        <Text type="text" id="userName" value={userName} onChange={(e) => setUserName(e.target.value)} name="userName" />
         <Div>
           <Label>What is your Secret Spell?</Label>
         </Div>
-        <Text type="text" color="antiquewhite" id="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
+        <Text type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
         <Div>
           <Button type="submit" id="knownUser" value="Known Wizard" onClick={handleSubmit} />
         </Div>
@@ -91,6 +91,7 @@ const LoginStyle = styled.div`
 
 const Text = styled.input`
   background-image: url('darkWood.jpg');
+  color: antiquewhite;
   border-radius:18px;
   border-color:antiqueWhite;
   text-align: center;
